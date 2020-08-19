@@ -1,0 +1,26 @@
+{
+  "name": "tailwind-gradient-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "postcss.config.js",
+  "dependencies": {
+    "autoprefixer": "^9.8.6",
+    "postcss-cli": "^7.1.1",
+    "tailwindcss": "^1.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "postcss assets/css/tailwind.css -o assets/css/tailwind.public.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jenstornell/tailwind-gradient-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jenstornell/tailwind-gradient-generator/issues"
+  },
+  "homepage": "https://github.com/jenstornell/tailwind-gradient-generator#readme"
+}
