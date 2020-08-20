@@ -281,7 +281,7 @@
       a donation.
       <div class="flex justify-center">
         <a href="https://www.paypal.me/devoneraab" class="inline-block p-2 bg-gray-300 rounded shadow" style="vertical-align: top;">
-          <img src="http://localhost/sites/halsokartan/assets/images/paypal.svg" class="w-24">
+          <img src="assets/images/paypal.svg" class="w-24">
         </a>
       </div>
     </div>
