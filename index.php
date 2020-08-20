@@ -69,7 +69,7 @@
     [
       'color' => 'current',
       'classes' => 'border',
-      'dot-color' => 'bg-black',
+      'dot-color' => 'bg-white',
       'shades' => false,
     ],
     [
@@ -94,26 +94,11 @@
     ['color' => 'pink']
   ];
   $root = 'http://localhost/tools/tailwind-gradient-generator/';
-  /*
-  DIRECTION
-    Hjul html med buttons
-    Klicka för att toggla runt
-    Till HTML
-    Till classes
-    Till preview
-  PREVIEW
-    Fixa stilen på gradient preview
-    Lägg till korrekta klasser
-      Disabled
-      Med eller utan shade
-  HTML
-    Disabled color
-  */
   ?>
 </head>
 
 <body class="flex flex-col h-full text-gray-800 bg-gray-100 font-body">
-  <div class="flex flex-col flex-1 gap-8 px-4 pb-8 sm:px-8">
+  <div class="flex flex-col flex-1 gap-12 px-4 pb-12 sm:px-8">
     <div class="relative pt-4">
       <div class="max-w-screen-sm mx-auto">
         <a href="<?= $root; ?>" class="flex flex-col items-center gap-3 sm:flex-row">
@@ -149,7 +134,7 @@
               ?>
                 <button data-has-shades="<?= $has_shades; ?>" data-type="color" data-step="<?= $section; ?>" data-color="<?= $group['color']; ?>" class="<?= $classes; ?> flex rounded justify-center items-center focus:outline-none relative w-8 h-8 <?= $class_color; ?>" title="<?= $group['color']; ?>">
                   <?php if ($group['color'] == 'current') : ?>
-                    <div class="absolute top-0 left-0 flex items-center justify-center w-full h-full text-3xl text-gray-400">C</div>
+                    <div class="absolute top-0 left-0 flex items-center justify-center w-full h-full text-sm text-gray-400">C</div>
                   <?php endif; ?>
                   <?php if ($group['color'] == 'none') : ?>
                     <div class="absolute w-full h-full opacity-25 close"></div>
@@ -191,6 +176,68 @@
           </div>
         </section>
       <?php endforeach; ?>
+
+      <!-- Direction -->
+      <div data-direction class="flex justify-center">
+        <div class="flex flex-col w-full max-w-screen-sm">
+          <div class="flex items-center justify-between">
+            <h2 class="px-3 py-2 leading-none text-white bg-gray-800 rounded-t-md">Direction</h2>
+          </div>
+          <div class="grid grid-flow-row p-4 text-gray-500 bg-white rounded-lg shadow-lg fill-current" style="grid-template-columns: repeat(3, minmax(0, min-content));">
+            <button data-class="tl" class="w-6 border border-transparent rounded hover:border-gray-500 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M9.414 8l8.607 8.607-1.414 1.414L8 9.414V17H6V6h11v2z" /></svg>
+            </button>
+            <button data-class="t" class="w-6 border border-transparent rounded hover:border-gray-500 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M13 7.828V20h-2V7.828l-5.364 5.364-1.414-1.414L12 4l7.778 7.778-1.414 1.414L13 7.828z" /></svg>
+            </button>
+            <button data-class="tr" class="w-6 border border-transparent rounded hover:border-gray-500 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M16.004 9.414l-8.607 8.607-1.414-1.414L14.589 8H7.004V6h11v11h-2V9.414z" /></svg>
+            </button>
+            <button data-class="l" class="w-6 border border-transparent rounded hover:border-gray-500 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z" /></svg>
+            </button>
+            <div></div>
+            <button data-class="r" class="text-gray-800 bg-gray-300 border border-transparent rounded focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" /></svg>
+            </button>
+            <button data-class="bl" class="w-6 border border-transparent rounded hover:border-gray-500 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M9 13.59l8.607-8.607 1.414 1.414-8.607 8.607H18v2H7v-11h2v7.585z" /></svg>
+            </button>
+            <button data-class="b" class="w-6 border border-transparent rounded hover:border-gray-500 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M13 16.172l5.364-5.364 1.414 1.414L12 20l-7.778-7.778 1.414-1.414L11 16.172V4h2v12.172z" /></svg>
+            </button>
+            <button data-class="br" class="w-6 border border-transparent rounded hover:border-gray-500 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M14.59 16.004L5.982 7.397l1.414-1.414 8.607 8.606V7.004h2v11h-11v-2z" /></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview -->
+    <div data-code data-preview class="flex justify-center hidden">
+      <div class="flex flex-col w-full max-w-screen-sm">
+        <div class="flex items-center justify-between">
+          <h2 class="px-3 py-2 leading-none text-white bg-gray-800 rounded-t-md">Preview</h2>
+        </div>
+        <div data-gradient class="h-16 bg-white rounded-b-lg shadow-xl"></div>
+      </div>
     </div>
 
     <!-- Code classes -->
@@ -248,6 +295,7 @@
     var shade = null;
     var step = null;
     var groups = {};
+    var direction = 'r';
     groups['from'] = {
       shade: "500"
     };
@@ -304,8 +352,30 @@
       });
 
       document.querySelectorAll('[data-code]').forEach(group => {
-        group.querySelector('[data-select]').addEventListener('click', (e) => {
-          selectText(group.querySelector('pre'));
+        const select = group.querySelector('[data-select]');
+        if (select) {
+          select.addEventListener('click', (e) => {
+            selectText(group.querySelector('pre'));
+          });
+        }
+      });
+
+      document.querySelectorAll('[data-class]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          const dataclass = e.currentTarget.dataset.class;
+          console.log(dataclass);
+          direction = dataclass;
+
+          document.querySelectorAll('[data-class]').forEach(item => {
+            item.classList.add('hover:border-gray-500');
+            item.classList.remove('text-gray-800', 'bg-gray-300');
+          });
+
+          e.currentTarget.classList.add('text-gray-800', 'bg-gray-300');
+          e.currentTarget.classList.remove('hover:border-gray-500');
+          //text-gray-800 bg-gray-300 border border-transparent rounded focus:outline-none
+
+          setCode();
         });
       });
     });
@@ -352,10 +422,6 @@
       });
     }
 
-    function setGradient() {
-
-    }
-
     function setCode() {
       let html = "";
       for (const key in groups) {
@@ -364,11 +430,17 @@
           html += ' ' + groups[key].class;
         }
       };
+
       html = html.substring(1, html.length);
-      document.querySelector('#code code').innerHTML = `&lt;div class="${html}"&gt;
+      html_with_direction = `bg-gradient-to-${direction + ' ' + html}`;
+      document.querySelector('#code code').innerHTML = `&lt;div class="${html_with_direction}"&gt;
   Gradient
 &lt;/div&gt;`;
-      document.querySelector('#code-classes code').innerHTML = html;
+      document.querySelector('#code-classes code').innerHTML = html_with_direction;
+
+      const default_classes = 'h-16 rounded-b-lg shadow-xl';
+      document.querySelector('[data-gradient]').setAttribute('class', default_classes + ' ' + html_with_direction);
+
       Prism.highlightAll();
 
       if (html == "") {

@@ -594,15 +594,15 @@ video {
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .container {
-    max-width: 740px;
-  }
-}
-
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
+  }
+}
+
+@media (min-width: 840px) {
+  .container {
+    max-width: 840px;
   }
 }
 
@@ -11582,7 +11582,7 @@ video {
 }
 
 .max-w-screen-sm {
-  max-width: 740px;
+  max-width: 840px;
 }
 
 .max-w-screen-md {
@@ -22229,20 +22229,20 @@ video {
           animation: bounce 1s infinite;
 }
 
-@media (min-width: 740px) {
+@media (min-width: 840px) {
   .sm\:container {
     width: 100%;
-  }
-
-  @media (min-width: 740px) {
-    .sm\:container {
-      max-width: 740px;
-    }
   }
 
   @media (min-width: 768px) {
     .sm\:container {
       max-width: 768px;
+    }
+  }
+
+  @media (min-width: 840px) {
+    .sm\:container {
+      max-width: 840px;
     }
   }
 
@@ -33222,7 +33222,7 @@ video {
   }
 
   .sm\:max-w-screen-sm {
-    max-width: 740px;
+    max-width: 840px;
   }
 
   .sm\:max-w-screen-md {
@@ -43809,15 +43809,15 @@ video {
     width: 100%;
   }
 
-  @media (min-width: 740px) {
-    .md\:container {
-      max-width: 740px;
-    }
-  }
-
   @media (min-width: 768px) {
     .md\:container {
       max-width: 768px;
+    }
+  }
+
+  @media (min-width: 840px) {
+    .md\:container {
+      max-width: 840px;
     }
   }
 
@@ -54797,7 +54797,7 @@ video {
   }
 
   .md\:max-w-screen-sm {
-    max-width: 740px;
+    max-width: 840px;
   }
 
   .md\:max-w-screen-md {
@@ -65384,15 +65384,15 @@ video {
     width: 100%;
   }
 
-  @media (min-width: 740px) {
-    .lg\:container {
-      max-width: 740px;
-    }
-  }
-
   @media (min-width: 768px) {
     .lg\:container {
       max-width: 768px;
+    }
+  }
+
+  @media (min-width: 840px) {
+    .lg\:container {
+      max-width: 840px;
     }
   }
 
@@ -76372,7 +76372,7 @@ video {
   }
 
   .lg\:max-w-screen-sm {
-    max-width: 740px;
+    max-width: 840px;
   }
 
   .lg\:max-w-screen-md {
@@ -86959,15 +86959,15 @@ video {
     width: 100%;
   }
 
-  @media (min-width: 740px) {
-    .xl\:container {
-      max-width: 740px;
-    }
-  }
-
   @media (min-width: 768px) {
     .xl\:container {
       max-width: 768px;
+    }
+  }
+
+  @media (min-width: 840px) {
+    .xl\:container {
+      max-width: 840px;
     }
   }
 
@@ -97947,7 +97947,7 @@ video {
   }
 
   .xl\:max-w-screen-sm {
-    max-width: 740px;
+    max-width: 840px;
   }
 
   .xl\:max-w-screen-md {
