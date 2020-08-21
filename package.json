@@ -8,9 +8,12 @@
     "postcss-cli": "^7.1.1",
     "tailwindcss": "^1.7.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cross-env": "^7.0.2"
+  },
   "scripts": {
-    "build": "postcss assets/css/tailwind.css -o assets/css/tailwind.public.css"
+    "build": "postcss assets/css/tailwind.css -o assets/css/tailwind.public.css",
+    "production": "cross-env NODE_ENV=production postcss assets/css/tailwind.css -o assets/css/tailwind.purged.css"
   },
   "repository": {
     "type": "git",

@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="assets/css/tailwind.public.css?t=<?= time(); ?>">
+  <title>Tailwind Gradient Designer</title>
+  <link rel="stylesheet" href="assets/css/tailwind.purged.css?t=<?= time(); ?>">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="assets/css/prism.css" rel="stylesheet">
 
@@ -301,13 +301,16 @@
     var groups = {};
     var direction = 'r';
     groups['from'] = {
-      shade: "500"
+      shade: "500",
+      color: "none"
     };
     groups['via'] = {
-      shade: "500"
+      shade: "500",
+      color: "none"
     };
     groups['to'] = {
-      shade: "500"
+      shade: "500",
+      color: "none"
     };
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -317,13 +320,17 @@
           const datasets = e.currentTarget.dataset;
           const colors = item.closest('[data-type="colors"]');
           const section = item.closest('section');
+          const color = datasets.color;
 
-          groups[datasets.step].color = datasets.color;
+          groups[datasets.step].color = color;
 
-          if (typeof groups[datasets.step].class == 'undefined') {
-            groups[datasets.step].class = `${datasets.step}-${groups[datasets.step].color}-500`;
+          if (['transparent', 'current', 'black', 'white'].includes(color)) {
+            console.log('hello');
+            groups[datasets.step].class = `${datasets.step}-${color}`;
+          } else if (typeof groups[datasets.step].class == 'undefined') {
+            groups[datasets.step].class = `${datasets.step}-${color}-500`;
           } else {
-            groups[datasets.step].class = `${datasets.step}-${groups[datasets.step].color}-${groups[datasets.step].shade}`;
+            groups[datasets.step].class = `${datasets.step}-${color}-${groups[datasets.step].shade}`;
           }
 
           if (item.dataset.hasShades == "true") {

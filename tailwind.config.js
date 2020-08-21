@@ -1,5 +1,10 @@
 module.exports = {
-  purge: [],
+  purge: {
+    content: ["./index.php"],
+    options: {
+      whitelistPatterns: [/^bg-/, /^from-/, /^via-/, /^to-/],
+    },
+  },
   theme: {
     extend: {},
     fontFamily: {
