@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "postcss assets/css/tailwind.css -o assets/css/tailwind.public.css",
-    "production": "cross-env NODE_ENV=production postcss assets/css/tailwind.css -o assets/css/tailwind.purged.css"
+    "production": "cross-env NODE_ENV=production postcss assets/css/tailwind.css -o assets/css/tailwind-purged.css"
   },
   "repository": {
     "type": "git",

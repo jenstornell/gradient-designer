@@ -1,6 +1,6 @@
 module.exports = {
   purge: {
-    content: ["./index.php"],
+    content: ["./index.html"],
     options: {
       whitelistPatterns: [/^bg-/, /^from-/, /^via-/, /^to-/],
     },

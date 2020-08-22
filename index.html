@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind Gradient Designer</title>
+  <link rel="stylesheet" href="assets/css/tailwind.public.css?t=<?= time(); ?>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="assets/css/prism.css" rel="stylesheet">
+</head>
+
+<body class="flex h-full text-gray-800 bg-gray-100 font-body">
+  <button>sdfsd</button>
+  <style>
+    .chess {
+      background-image: linear-gradient(45deg, rgb(160, 174, 192) 25%, transparent 25%),
+        linear-gradient(-45deg, rgb(160, 174, 192) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgb(160, 174, 192) 75%),
+        linear-gradient(-45deg, transparent 75%, rgb(160, 174, 192) 75%);
+      background-size: 12px 12px;
+      background-position: 0 0,
+        0 6px,
+        6px -6px,
+        -6px 0px;
+    }
+
+    .close:before,
+    .close:after {
+      position: absolute;
+      left: calc(50% - 1px);
+      content: ' ';
+      height: 100%;
+      width: 2px;
+      background-color: #718096;
+    }
+
+    .close:before {
+      transform: rotate(45deg);
+    }
+
+    .close:after {
+      transform: rotate(-45deg);
+    }
+
+    .close-active:before,
+    .close-active:after {
+      background-color: #f56565;
+    }
+  </style>
+
+  <div class="flex flex-1">
+    <div class="relative flex flex-col h-full bg-white shadow">
+      <sidebar-section title="From" subtitle="none" bg="red">
+      </sidebar-section>
+      <sidebar-section title="Via" subtitle="none" bg="transparent">
+      </sidebar-section>
+      <sidebar-section title="To" subtitle="none" bg="current">
+      </sidebar-section>
+      <sidebar-section title="Direction" subtitle="right" bg="none">
+      </sidebar-section>
+      <sidebar-section title="Get code" subtitle="none" bg="icon">
+      </sidebar-section>
+    </div>
+    <div class="flex-1">
+      <palette-widget title="From" color="orange" shade="200"></palette-widget>
+    </div>
+    <div>ok</div>
+  </div>
+  <!--
+  <div class="fixed flex-col bg-gray-100">
+    <div class="flex flex-1">
+      <div class="flex items-center justify-center flex-1 py-4 bg-white">
+        <div class="w-12 h-12 bg-red-500 rounded"></div>
+      </div>
+      <div class="flex items-center justify-center flex-1 py-4 bg-gray-800">
+        <div class="w-12 h-12 bg-red-500 rounded"></div>
+      </div>
+    </div>
+    <div class="h-12 bg-red-500"></div>
+  </div>
+-->
+
+
+  <script src="assets/js/palette-colors.js"></script>
+  <script src="assets/js/palette-color.js"></script>'
+  <script src="assets/js/palette-shades.js"></script>
+  <script src="assets/js/palette-widget.js"></script>
+  <script src="assets/js/sidebar-section.js"></script>
+
+  <script>
+    document.querySelector('button').addEventListener('click', (e) => {
+      console.log(e);
+      const shades = document.querySelector('palette-shades');
+      console.log(shades);
+      shades.setAttribute('color', 'green');
+    });
+  </script>
+</body>
+
+</html>
