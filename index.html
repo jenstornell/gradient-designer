@@ -10,8 +10,7 @@
   <link href="assets/css/prism.css" rel="stylesheet">
 </head>
 
-<body class="flex h-full text-gray-800 bg-gray-100 font-body">
-  <button>sdfsd</button>
+<body class="flex flex-col h-full text-gray-800 bg-gray-100 font-body">
   <style>
     .chess {
       background-image: linear-gradient(45deg, rgb(160, 174, 192) 25%, transparent 25%),
@@ -51,22 +50,36 @@
 
   <div class="flex flex-1">
     <div class="relative flex flex-col h-full bg-white shadow">
-      <sidebar-section title="From" subtitle="none" bg="red">
+      <sidebar-section title="State" subtitle="default" bg="red">
       </sidebar-section>
-      <sidebar-section title="Via" subtitle="none" bg="transparent">
-      </sidebar-section>
-      <sidebar-section title="To" subtitle="none" bg="current">
-      </sidebar-section>
-      <sidebar-section title="Direction" subtitle="right" bg="none">
+      <sidebar-section title="Presets" bg="red">
       </sidebar-section>
       <sidebar-section title="Get code" subtitle="none" bg="icon">
       </sidebar-section>
     </div>
     <div class="flex-1">
+      <palette-tabs></palette-tabs>
       <palette-widget title="From" color="orange" shade="200"></palette-widget>
+      <preview-gradient></preview-gradient>
     </div>
     <div>ok</div>
   </div>
+  </div>
+
+  <footer class="flex px-4 bg-gray-800">
+    <div class="flex flex-col flex-1 gap-2 py-4">
+      <div class="font-bold leading-none text-gray-200">Tailwind Gradient Designer</div>
+      <div class="text-xs leading-none text-gray-500">Build on <a href="https://tailwindcss.com/"
+          class="underline">Tailwind
+          CSS</a> and <a href="https://remixicon.com/" class="underline">RemixIcon</a></div>
+    </div>
+    <div class="flex flex-col items-end justify-center flex-1 gap-2 py-2 text-xs text-gray-500">
+      <div class="p-1 bg-gray-300 rounded">
+        <img class="h-4" src="assets/images/paypal.svg">
+      </div>
+      <div class="leading-none">Please make a donation</div>
+    </div>
+  </footer>
   <!--
   <div class="fixed flex-col bg-gray-100">
     <div class="flex flex-1">
@@ -83,18 +96,29 @@
 
 
   <script src="assets/js/palette-colors.js"></script>
-  <script src="assets/js/palette-color.js"></script>'
+  <script src="assets/js/palette-color.js"></script>
   <script src="assets/js/palette-shades.js"></script>
   <script src="assets/js/palette-widget.js"></script>
   <script src="assets/js/sidebar-section.js"></script>
+  <script src="assets/js/preview-gradient.js"></script>
+  <script src="assets/js/palette-tabs.js"></script>
+  <script src="assets/js/palette-tab-item.js"></script>
+  <script src="assets/js/direction-tab-item.js"></script>
 
   <script>
-    document.querySelector('button').addEventListener('click', (e) => {
-      console.log(e);
+    var store = {
+      state: "default",
+      step: "from",
+      default: {
+
+      }
+    };
+    /*document.querySelector('button').addEventListener('click', (e) => {
+
       const shades = document.querySelector('palette-shades');
-      console.log(shades);
+      shades.querySelector('[shade="100"]').setAttribute('active', "true");
       shades.setAttribute('color', 'green');
-    });
+    });*/
   </script>
 </body>
 

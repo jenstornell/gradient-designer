@@ -4,7 +4,7 @@ class PaletteColor extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["color", "shade"];
+    return ["color", "shade", "active"];
   }
 
   /*** GETTERS */
@@ -23,32 +23,30 @@ class PaletteColor extends HTMLElement {
   /*** RENDERS */
   renderRoot() {
     return `
-    <div class="${this.classes()}">
+    <div class="${this.classes()}" title="${this.color}">
       <div data-extra class="h-full contains">${this.renderExtra()}</div>
-      <div data-dot class="contains h-full">${this.renderActive()}</div>
+      <div data-dot class="contains h-full absolute top-0 left-0 w-full">${this.renderActive()}</div>
     </div>
     `;
   }
 
   renderActive() {
-    if (this.color != "none") {
-      let color = null;
-      if (["current", "black"].includes(this.color)) {
-        color = "gray-200";
-      } else if (["none", "transparent", "white"].includes(this.color)) {
-        color = "gray-800";
-      } else {
-        const bright = ["100", "200", "300", "400"].includes(this.shade);
-        color = bright ? this.color + "-800" : this.color + "-200";
-      }
-      return `
+    if (!this.active || this.color == "none") return "";
+
+    let color = null;
+    if (["current", "black"].includes(this.color)) {
+      color = "gray-200";
+    } else if (["none", "transparent", "white"].includes(this.color)) {
+      color = "gray-800";
+    } else {
+      const bright = ["100", "200", "300", "400"].includes(this.shade);
+      color = bright ? this.color + "-800" : this.color + "-200";
+    }
+    return `
     <div class="absolute left-0 top-0 w-full h-full flex items-center justify-center">
       <div class="bg-${color} h-3 w-3 rounded-full"></div>
     </div>
     `;
-    } else {
-      return "";
-    }
   }
 
   renderExtra() {
@@ -77,7 +75,7 @@ class PaletteColor extends HTMLElement {
   /*** CLASSES */
   classes() {
     return [
-      "h-full rounded relative",
+      "h-full rounded relative select-none",
       this.classColor(),
       this.classBorder(),
       this.classTransparent(),

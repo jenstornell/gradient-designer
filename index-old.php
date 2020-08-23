@@ -325,7 +325,6 @@
           groups[datasets.step].color = color;
 
           if (['transparent', 'current', 'black', 'white'].includes(color)) {
-            console.log('hello');
             groups[datasets.step].class = `${datasets.step}-${color}`;
           } else if (typeof groups[datasets.step].class == 'undefined') {
             groups[datasets.step].class = `${datasets.step}-${color}-500`;
@@ -374,7 +373,6 @@
       document.querySelectorAll('[data-class]').forEach(el => {
         el.addEventListener('click', (e) => {
           const dataclass = e.currentTarget.dataset.class;
-          console.log(dataclass);
           direction = dataclass;
 
           document.querySelectorAll('[data-class]').forEach(item => {

@@ -1,16 +1,17 @@
 class PaletteShades extends HTMLElement {
   constructor() {
     super();
-
-    this.color = this.getAttribute("color");
-    this.innerHTML = this.template();
   }
 
   static get observedAttributes() {
     return ["color"];
   }
 
-  template() {
+  get color() {
+    return this.getAttribute("color");
+  }
+
+  renderRoot() {
     let html = "";
     const shades = [
       "100",
@@ -25,7 +26,7 @@ class PaletteShades extends HTMLElement {
     ];
     shades.forEach((shade) => {
       html += `
-        <palette-color color="${this.color}" shade="${shade}" active="true"></palette-color>
+        <palette-color color="${this.color}" shade="${shade}"></palette-color>
       `;
     });
     return `
@@ -40,6 +41,25 @@ class PaletteShades extends HTMLElement {
       item.setAttribute("color", newValue);
     });
   }
+
+  connectedCallback() {
+    this.innerHTML = this.renderRoot();
+    //this.onClick();
+    this.querySelector('[shade="500"]').setAttribute("active", "true");
+  }
+
+  /*onClick() {
+    this.querySelectorAll("palette-color").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        const current = e.currentTarget;
+
+        store[store.state][store.step] = {
+          color: current.color,
+          shade: current.shade,
+        };
+      });
+    });
+  }*/
 }
 
 customElements.define("palette-shades", PaletteShades);
