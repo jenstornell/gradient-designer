@@ -12,18 +12,6 @@
 
 <body class="flex flex-col h-full text-gray-800 bg-gray-100 font-body">
   <style>
-    .chess {
-      background-image: linear-gradient(45deg, rgb(160, 174, 192) 25%, transparent 25%),
-        linear-gradient(-45deg, rgb(160, 174, 192) 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, rgb(160, 174, 192) 75%),
-        linear-gradient(-45deg, transparent 75%, rgb(160, 174, 192) 75%);
-      background-size: 12px 12px;
-      background-position: 0 0,
-        0 6px,
-        6px -6px,
-        -6px 0px;
-    }
-
     .close:before,
     .close:after {
       position: absolute;
@@ -48,14 +36,34 @@
     }
   </style>
 
-  <div class="flex flex-1">
-    <div class="relative flex flex-col h-full bg-white shadow">
-      <sidebar-section title="State" subtitle="default" bg="red">
-      </sidebar-section>
-      <sidebar-section title="Presets" bg="red">
-      </sidebar-section>
-      <sidebar-section title="Get code" subtitle="none" bg="icon">
-      </sidebar-section>
+  <div class="flex flex-1 overflow-hidden">
+    <div class="relative flex flex-col h-full overflow-y-auto bg-white shadow">
+      <section class="flex flex-col gap-2 px-4 py-4 border-b">
+        <h3 class="text-sm font-bold leading-none uppercase">Custom</h3>
+
+        <gradient-squares group="custom"></gradient-squares>
+
+        <div class="flex items-center justify-center w-16 h-16 -mt-1 bg-gray-200 border rounded fill-current">
+          <svg class="w-6 h-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+            height="24">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" /></svg>
+        </div>
+      </section>
+      <section class="flex flex-col gap-2 px-4 py-4 border-b">
+        <h3 class="text-sm font-bold leading-none uppercase">Heroes</h3>
+        <gradient-squares group="heroes"></gradient-squares>
+      </section>
+
+      <section class="flex flex-col gap-2 px-4 py-4 border-b">
+        <h3 class="text-sm font-bold leading-none uppercase">Buttons</h3>
+        <gradient-squares group="buttons"></gradient-squares>
+      </section>
+
+      <section class="flex flex-col gap-2 px-4 py-4 border-b">
+        <h3 class="text-sm font-bold leading-none uppercase">Misc</h3>
+        <gradient-squares group="misc"></gradient-squares>
+      </section>
     </div>
     <div class="flex-1">
       <palette-tabs></palette-tabs>
@@ -95,6 +103,26 @@
 -->
 
 
+
+  <script src="assets/js/store.js"></script>
+  <script>
+    function colorToClass(color, shade = null) {
+
+    }
+
+    function gradientToClass(type, color, shade = null) {
+      let html = `${type}-${color}`;
+
+      if (store.state.settings.hasShades.includes(color)) {
+        if (shade) {
+          html += `-${shade}`;
+        } else {
+          return null;
+        }
+      };
+      return html;
+    }
+  </script>
   <script src="assets/js/palette-colors.js"></script>
   <script src="assets/js/palette-color.js"></script>
   <script src="assets/js/palette-shades.js"></script>
@@ -104,15 +132,12 @@
   <script src="assets/js/palette-tabs.js"></script>
   <script src="assets/js/palette-tab-item.js"></script>
   <script src="assets/js/direction-tab-item.js"></script>
+  <script src="assets/js/gradient-square.js"></script>
+  <script src="assets/js/gradient-squares.js"></script>
+
+
 
   <script>
-    var store = {
-      state: "default",
-      step: "from",
-      default: {
-
-      }
-    };
     /*document.querySelector('button').addEventListener('click', (e) => {
 
       const shades = document.querySelector('palette-shades');

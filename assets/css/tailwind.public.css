@@ -590,6 +590,47 @@ video {
   height: auto;
 }
 
+::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  --bg-opacity: 1;
+  background-color: #edf2f7;
+  background-color: rgba(237, 242, 247, var(--bg-opacity));
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  --bg-opacity: 1;
+  background-color: #cbd5e0;
+  background-color: rgba(203, 213, 224, var(--bg-opacity));
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  --bg-opacity: 1;
+  background-color: #a0aec0;
+  background-color: rgba(160, 174, 192, var(--bg-opacity));
+}
+
+.chess {
+  background-image: linear-gradient(
+      45deg,
+      rgb(160, 174, 192) 25%,
+      transparent 25%
+    ),
+    linear-gradient(-45deg, rgb(160, 174, 192) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgb(160, 174, 192) 75%),
+    linear-gradient(-45deg, transparent 75%, rgb(160, 174, 192) 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 0 6px, 6px -6px, -6px 0px;
+}
+
 .container {
   width: 100%;
 }
