@@ -7,26 +7,6 @@ class GradientSquare extends HTMLElement {
     return ["gradient", "active"];
   }
 
-  /*get from() {
-    if (!this.has("from")) return "";
-    return "from-" + this.getAttribute("from");
-  }
-
-  get via() {
-    if (!this.has("via")) return "";
-    return "via-" + this.getAttribute("via");
-  }
-
-  get to() {
-    if (!this.has("to")) return "";
-    return "to-" + this.getAttribute("to");
-  }
-
-  get title() {
-    if (!this.has("title")) return "";
-    return this.getAttribute("title");
-  }*/
-
   get active() {
     if (
       !this.getAttribute("active") ||
@@ -37,22 +17,6 @@ class GradientSquare extends HTMLElement {
     return true;
   }
 
-  /* get direction() {
-    if (!this.has("direction")) return "bg-gradient-to-r";
-    return "bg-gradient-to-" + this.getAttribute("direction");
-  }
-
-  has(value) {
-    if (
-      this.getAttribute(value) == "" ||
-      !this.getAttribute(value) ||
-      this.getAttribute(value) == "undefined"
-    ) {
-      return false;
-    }
-    return true;
-  }*/
-
   get key() {
     return this.getAttribute("key");
   }
@@ -62,17 +26,31 @@ class GradientSquare extends HTMLElement {
   }
 
   classes() {
-    //console.log(this.key);
-    //
-    //console.log(store.state[this.group][this.key]);
-
-    console.log(this.data().classes);
     const collection = this.data().classes;
+    let html = "";
 
     for (const key in collection) {
       const data = collection[key];
-      console.log(data);
+      const class_html = key + this.toClass(data);
+
+      html += " " + class_html;
     }
+    return html;
+  }
+
+  toClass(obj) {
+    let html = "";
+    if (!this.isEmpty(obj["color"])) {
+      html += `-${obj["color"]}`;
+    }
+    if (!this.isEmpty(obj["shade"])) {
+      html += `-${obj["shade"]}`;
+    }
+    return html;
+  }
+
+  isEmpty(obj) {
+    return Object.keys(obj).length === 0;
   }
 
   data() {
@@ -81,7 +59,9 @@ class GradientSquare extends HTMLElement {
 
   renderRoot() {
     return `
-    <div class="flex items-center justify-center w-16 h-16 ${this.classes()} rounded" title="${
+    <div class="bg-gradient-to-${
+      this.data().direction
+    } flex items-center justify-center w-16 h-16 ${this.classes()} rounded" title="${
       this.title
     }">
       ${this.renderActive()}

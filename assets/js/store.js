@@ -123,24 +123,51 @@ const store = {
     buttons: {
       buttonBright: {
         title: "Button - Bright",
-        from: "gray-400",
-        to: "gray-300",
         direction: "t",
+        classes: {
+          from: {
+            color: "gray",
+            shade: "400",
+          },
+          to: {
+            color: "gray",
+            shade: "300",
+          },
+        },
       },
       buttonDark: {
         title: "Button - Dark",
-        from: "gray-700",
-        to: "gray-600",
         direction: "t",
+        classes: {
+          from: {
+            color: "gray",
+            shade: "700",
+          },
+          to: {
+            color: "gray",
+            shade: "600",
+          },
+        },
       },
     },
     misc: {
       equalizer: {
         title: "Equalizer",
-        from: "red-500",
-        via: "yellow-500",
-        to: "green-500",
         direction: "t",
+        classes: {
+          from: {
+            color: "red",
+            shade: "500",
+          },
+          via: {
+            color: "500",
+            shade: "500",
+          },
+          to: {
+            color: "green",
+            shade: "500",
+          },
+        },
       },
     },
   },
