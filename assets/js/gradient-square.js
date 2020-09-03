@@ -8,12 +8,8 @@ class GradientSquare extends HTMLElement {
   }
 
   get active() {
-    if (
-      !this.getAttribute("active") ||
-      this.getAttribute("active") == "false"
-    ) {
-      return false;
-    }
+    if (!this.getAttribute("active")) return false;
+    if (this.getAttribute("active") == "false") return false;
     return true;
   }
 
@@ -72,7 +68,7 @@ class GradientSquare extends HTMLElement {
   renderActive() {
     if (!this.active) return "";
     return `
-    <div class="w-5 h-5 bg-gray-700 border-4 border-white rounded-full shadow"></div>
+    <div class="w-5 h-5 bg-white rounded-full shadow" style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, .5);"></div>
     `;
   }
 
@@ -97,6 +93,8 @@ class GradientSquare extends HTMLElement {
       });
 
       el.setAttribute("active", "true");
+
+      store.getters.onClickGradient();
     });
   }
 }

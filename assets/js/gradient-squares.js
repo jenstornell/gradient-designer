@@ -3,8 +3,16 @@ class GradientSquares extends HTMLElement {
     super();
   }
 
+  static get observedAttributes() {
+    return ["time"];
+  }
+
   get group() {
     return this.getAttribute("group");
+  }
+
+  get time() {
+    return this.getAttribute("time");
   }
 
   renderRoot() {
@@ -26,6 +34,10 @@ class GradientSquares extends HTMLElement {
   }
 
   connectedCallback() {
+    this.innerHTML = this.renderRoot();
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
     this.innerHTML = this.renderRoot();
   }
 }

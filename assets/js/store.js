@@ -16,6 +16,20 @@ const store = {
     count: 0,
     custom: {},
     current: {},
+    default: {
+      title: "Hero - Bright",
+      direction: "tl",
+      classes: {
+        from: {
+          color: "gray",
+          shade: "400",
+        },
+        to: {
+          color: "gray",
+          shade: "100",
+        },
+      },
+    },
     heroes: {
       heroBright: {
         title: "Hero - Bright",
@@ -181,6 +195,11 @@ const store = {
     current(el) {
       console.log(el);
     },
+    gradient(gradient) {
+      console.log(gradient);
+      store.state.custom["gradient_" + Date.now()] = gradient;
+      console.log(store);
+    },
   },
   getters: {
     count() {
@@ -201,17 +220,40 @@ const store = {
     misc() {
       return store.state.misc;
     },
+    onClickGradient() {
+      console.log("clicked gradient");
+    },
+  },
+  actions: {
+    onClickGradientAdd() {
+      const gradient = store.state.default;
+      store.setters.gradient(gradient);
+
+      document
+        .querySelector('gradient-squares[group="custom"]')
+        .setAttribute("time", Date.now());
+    },
   },
 };
 
 if (typeof localStorage.twgd == "undefined") {
   const defaults = {
-    title: "default",
-    from: "red-500",
-    via: "red-200",
-    to: "red-100",
+    title: "Hero - Bright",
+    direction: "tl",
+    classes: {
+      from: {
+        color: "gray",
+        shade: "400",
+      },
+      to: {
+        color: "gray",
+        shade: "100",
+      },
+    },
   };
 
   store.setters.default(defaults);
   store.getters.custom();
 }
+
+console.log(store);
