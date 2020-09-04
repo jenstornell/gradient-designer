@@ -60,12 +60,29 @@
         <gradient-squares group="misc"></gradient-squares>
       </section>
     </div>
-    <div class="flex-1">
-      <palette-tabs></palette-tabs>
-      <palette-widget title="From" color="orange" shade="200"></palette-widget>
-      <preview-gradient></preview-gradient>
+    <div class="flex flex-col flex-1">
+      <div class="flex flex-col flex-1 bg-red-500">
+        <!-- Hero -->
+        <div class="flex-1 bg-red-500">
+          <preview-hero current="default"></preview-hero>
+        </div>
+        <div class="flex">
+          <div class="flex items-center justify-center flex-1 p-4 bg-white">
+            <!-- Button on white -->
+            <button class="w-32 h-10 bg-red-500 rounded-full focus:outline-none"></button>
+          </div>
+          <div class="flex items-center justify-center flex-1 p-4 bg-black">
+            <!-- Same button on black -->
+            <button class="w-32 h-10 bg-red-500 rounded-full focus:outline-none"></button>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <palette-tabs></palette-tabs>
+        <palette-widget title="From" color="orange" shade="200"></palette-widget>
+        <preview-gradient></preview-gradient>
+      </div>
     </div>
-    <div>ok</div>
   </div>
   </div>
 
@@ -117,6 +134,27 @@
       };
       return html;
     }
+
+    function currentToClasses(current) {
+      console.log(current);
+      const obj = store.state.custom[current].classes;
+      console.log(obj);
+      let html = '';
+      for (const key in obj) {
+        console.log(key);
+        const item = obj[key];
+        console.log(item);
+        // HÄR
+
+        html += `${item}-${item.color}`;
+
+        if (store.state.settings.hasShades.includes(color)) {
+          if (shade) {
+            html += `-${shade}`;
+          }
+        }
+      }
+    }
   </script>
   <script src="assets/js/palette-colors.js"></script>
   <script src="assets/js/palette-color.js"></script>
@@ -130,6 +168,7 @@
   <script src="assets/js/gradient-square.js"></script>
   <script src="assets/js/gradient-squares.js"></script>
   <script src="assets/js/gradient-add.js"></script>
+  <script src="assets/js/preview-hero.js"></script>
 
 
   <script>

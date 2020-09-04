@@ -48,7 +48,7 @@ class PaletteTabItem extends HTMLElement {
   }
 
   activeClasses() {
-    return this.active ? "border-gray-400 border-r border-l border-t" : "";
+    return this.active ? "border-gray-500 border-r border-l border-t" : "";
   }
 
   attributeChangedCallback(name, oldValue, newValue) {

@@ -115,24 +115,6 @@ const store = {
           },
         },
       },
-      heroHot: {
-        title: "Hero",
-        direction: "tl",
-        classes: {
-          from: {
-            color: "red",
-            shade: "700",
-          },
-          via: {
-            color: "orange",
-            shade: "500",
-          },
-          to: {
-            color: "yellow",
-            shade: "300",
-          },
-        },
-      },
     },
     buttons: {
       buttonBright: {
@@ -174,7 +156,7 @@ const store = {
             shade: "500",
           },
           via: {
-            color: "500",
+            color: "yellow",
             shade: "500",
           },
           to: {
@@ -195,10 +177,14 @@ const store = {
     current(el) {
       console.log(el);
     },
-    gradient(gradient) {
-      console.log(gradient);
+    addGradient(gradient) {
       store.state.custom["gradient_" + Date.now()] = gradient;
-      console.log(store);
+    },
+    currentGradient(group, gradient) {
+      store.state.current.gradient = gradient;
+      store.state.current.group = group;
+      store.state.current.state = "from";
+      console.log(store.state.current);
     },
   },
   getters: {
@@ -220,18 +206,23 @@ const store = {
     misc() {
       return store.state.misc;
     },
-    onClickGradient() {
-      console.log("clicked gradient");
+    gradient(group, name) {
+      return store.state[group][name];
     },
   },
   actions: {
     onClickGradientAdd() {
       const gradient = store.state.default;
-      store.setters.gradient(gradient);
+      store.setters.addGradient(gradient);
 
       document
         .querySelector('gradient-squares[group="custom"]')
         .setAttribute("time", Date.now());
+    },
+    onClickGradient(group, name) {
+      store.setters.currentGradient(group, name);
+      const collection = store.getters.gradient(group, name);
+      console.log(collection);
     },
   },
 };

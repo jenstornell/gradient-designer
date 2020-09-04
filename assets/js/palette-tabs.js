@@ -8,7 +8,7 @@ class PaletteTabs extends HTMLElement {
   renderRoot() {
     return `
     <div class="select-none cursor-default px-4 pt-3 bg-white">
-      <div class="border-b flex">   
+      <div class="border-b border-gray-500 flex">   
         <palette-tab-item name="from" active="true" color="none" title="From"></palette-tab-item>
         <palette-tab-item name="via" color="none" title="Via"></palette-tab-item>
         <palette-tab-item name="to" color="none" title="To"></palette-tab-item>

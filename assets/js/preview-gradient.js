@@ -13,7 +13,7 @@ class PreviewGradient extends HTMLElement {
 
   renderRoot() {
     return `
-    <div class="bg-gradient-to-r from-${this.from}">sfds</div>
+    <div class="bg-gradient-to-r from-${this.from}"></div>
     `;
   }
 
