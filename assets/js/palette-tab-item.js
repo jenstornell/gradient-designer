@@ -26,11 +26,7 @@ class PaletteTabItem extends HTMLElement {
   renderRoot() {
     return `
       <div class="flex relative rounded-t ${this.activeClasses()} px-4 py-2">
-        ${this.backdrop()}
         <div class="relative gap-2 flex items-center">
-          <palette-color color="${
-            this.color
-          }" ${this.shadeValue()} class="block w-4 h-4"></palette-color>  
           ${this.title}
         </div>
       </div>`;
@@ -40,15 +36,8 @@ class PaletteTabItem extends HTMLElement {
     return this.shade ? `shade="${this.shade}"` : "";
   }
 
-  backdrop() {
-    if (this.active) {
-      return `<div class="absolute bg-white h-full w-full left-0 mt-1 top-0"></div>`;
-    }
-    return "";
-  }
-
   activeClasses() {
-    return this.active ? "border-gray-500 border-r border-l border-t" : "";
+    return this.active ? "bg-white border-gray-400 topshadow" : "";
   }
 
   attributeChangedCallback(name, oldValue, newValue) {

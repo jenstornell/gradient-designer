@@ -50,7 +50,7 @@ class GradientSquare extends HTMLElement {
   }
 
   data() {
-    return store.state[this.group][this.key];
+    return store.state.gradients[this.group][this.key];
   }
 
   renderRoot() {

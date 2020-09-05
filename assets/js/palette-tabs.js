@@ -7,12 +7,11 @@ class PaletteTabs extends HTMLElement {
 
   renderRoot() {
     return `
-    <div class="select-none cursor-default px-4 pt-3 bg-white">
-      <div class="border-b border-gray-500 flex">   
-        <palette-tab-item name="from" active="true" color="none" title="From"></palette-tab-item>
-        <palette-tab-item name="via" color="none" title="Via"></palette-tab-item>
-        <palette-tab-item name="to" color="none" title="To"></palette-tab-item>
-        <direction-tab-item title="Direction"></direction-tab-item>
+    <div class="select-none cursor-default px-4 pt-3 bg-gray-300">
+      <div class="flex">   
+        <palette-tab-item name="from" title="From" active="true"></palette-tab-item>
+        <palette-tab-item name="via" title="Via"></palette-tab-item>
+        <palette-tab-item name="to" title="To"></palette-tab-item>
       </div>
     </div>
     `;
@@ -33,17 +32,6 @@ class PaletteTabs extends HTMLElement {
     const el = this.querySelector(`palette-tab-item[active="true"]`);
     el.removeAttribute("active");
     e.currentTarget.setAttribute("active", "true");
-
-    store.step = e.currentTarget.getAttribute("name");
-
-    const data = Object.assign(
-      {
-        color: "red",
-        shade: null,
-      },
-      store[store.state][store.step]
-    );
-    document.querySelector("palette-widget").setAttribute("color", data.color);
   }
 }
 

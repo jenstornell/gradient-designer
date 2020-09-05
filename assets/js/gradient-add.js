@@ -21,7 +21,6 @@ class GradientAdd extends HTMLElement {
 
   onClick() {
     this.addEventListener("click", (e) => {
-      console.log(e);
       store.actions.onClickGradientAdd();
     });
   }

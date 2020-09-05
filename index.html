@@ -61,25 +61,40 @@
       </section>
     </div>
     <div class="flex flex-col flex-1">
-      <div class="flex flex-col flex-1 bg-red-500">
+      <div class="flex flex-col flex-1">
         <!-- Hero -->
-        <div class="flex-1 bg-red-500">
-          <preview-hero current="default"></preview-hero>
+        <div class="flex-1">
+          <preview-hero group="custom" name="default"></preview-hero>
         </div>
         <div class="flex">
-          <div class="flex items-center justify-center flex-1 p-4 bg-white">
-            <!-- Button on white -->
-            <button class="w-32 h-10 bg-red-500 rounded-full focus:outline-none"></button>
+          <div class="flex flex-col flex-1 gap-4 p-4 bg-white">
+            <div class="flex justify-between text-sm font-bold leading-none uppercase">
+              <div>Gradient preview</div>
+              <div>Gradient colors</div>
+            </div>
+            <div class="flex justify-between">
+              <preview-button class="contents" group="custom" name="default"></preview-button>
+              <preview-colors class="contents" group="custom" name="default"></preview-colors>
+            </div>
           </div>
-          <div class="flex items-center justify-center flex-1 p-4 bg-black">
-            <!-- Same button on black -->
-            <button class="w-32 h-10 bg-red-500 rounded-full focus:outline-none"></button>
+          <div class="flex flex-col flex-1 gap-4 p-4 text-white bg-black">
+            <div class="flex justify-between text-sm font-bold leading-none uppercase">
+              <div>Gradient preview</div>
+              <div>Gradient colors</div>
+            </div>
+            <div class="flex justify-between">
+              <preview-button class="contents" group="custom" name="default"></preview-button>
+              <preview-colors class="contents" group="custom" name="default"></preview-colors>
+            </div>
           </div>
         </div>
       </div>
       <div class="">
         <palette-tabs></palette-tabs>
+        <palette-colors color="red"></palette-colors>
+        <!--
         <palette-widget title="From" color="orange" shade="200"></palette-widget>
+        -->
         <preview-gradient></preview-gradient>
       </div>
     </div>
@@ -116,10 +131,17 @@
 
 
 
+  <script src="assets/js/store-presets.js"></script>
   <script src="assets/js/store.js"></script>
   <script>
+
+    console.log(store.getters.currentColor());
     function colorToClass(color, shade = null) {
 
+    }
+
+    String.prototype.capitalize = function () {
+      return this.charAt(0).toUpperCase() + this.slice(1);
     }
 
     function gradientToClass(type, color, shade = null) {
@@ -135,25 +157,45 @@
       return html;
     }
 
-    function currentToClasses(current) {
-      console.log(current);
-      const obj = store.state.custom[current].classes;
-      console.log(obj);
+    function currentToClasses(group, name) {
+      const obj = store.state.gradients[group][name].classes;
       let html = '';
+
       for (const key in obj) {
-        console.log(key);
         const item = obj[key];
-        console.log(item);
-        // HÄR
 
-        html += `${item}-${item.color}`;
+        if (store.state.allowedColors.includes(item.color)) {
+          html += `${key}-${item.color}`;
+          let shade = ' ';
+          const allowed_shade = store.state.settings.hasShades.includes(item.color);
 
-        if (store.state.settings.hasShades.includes(color)) {
-          if (shade) {
-            html += `-${shade}`;
+          if (allowed_shade && item.shade) {
+            shade = `-${item.shade} `;
+          }
+          html += shade;
+        }
+      }
+      html += `bg-gradient-to-${store.state.gradients[group][name].direction}`;
+
+      return html;
+    }
+
+    function currentToBackgrounds(group, name) {
+      const obj = store.state.gradients[group][name].classes;
+
+      let classes = {};
+      for (const key in obj) {
+        const item = obj[key];
+
+        classes[key] = `bg-${item.color}`;
+
+        if (store.state.settings.hasShades.includes(item.color)) {
+          if (item.shade) {
+            classes[key] += `-${item.shade}`;
           }
         }
       }
+      return classes;
     }
   </script>
   <script src="assets/js/palette-colors.js"></script>
@@ -169,7 +211,8 @@
   <script src="assets/js/gradient-squares.js"></script>
   <script src="assets/js/gradient-add.js"></script>
   <script src="assets/js/preview-hero.js"></script>
-
+  <script src="assets/js/preview-button.js"></script>
+  <script src="assets/js/preview-colors.js"></script>
 
   <script>
     /*document.querySelector('button').addEventListener('click', (e) => {

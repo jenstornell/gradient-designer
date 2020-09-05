@@ -38,23 +38,24 @@ class PaletteColors extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     this.innerHTML = this.renderRoot();
+    this.onClick();
   }
 
   connectedCallback() {
     this.innerHTML = this.renderRoot();
-    // this.onClick();
+    this.onClick();
   }
 
-  /*onClick() {
-    this.querySelectorAll("palette-color").forEach((item) => {
-      item.addEventListener("click", (e) => {
-        const current = e.currentTarget;
+  onClick() {
+    this.querySelectorAll("palette-color").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        const color = e.currentTarget.getAttribute("color");
+        console.log(color);
 
-        store[store.state][store.step]["color"] = current.color;
-       
+        store.setters.color(color);
       });
     });
-  }*/
+  }
 }
 
 customElements.define("palette-colors", PaletteColors);

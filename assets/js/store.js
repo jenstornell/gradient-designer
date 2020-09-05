@@ -4,18 +4,39 @@ const store = {
       hasShades: [
         "gray",
         "red",
+        "yellow",
         "orange",
         "green",
         "teal",
         "blue",
         "indigo",
+        "purple",
         "pink",
       ],
       isTransparent: ["transparent"],
     },
+    allowedColors: [
+      "transparent",
+      "current",
+      "black",
+      "white",
+      "gray",
+      "red",
+      "yellow",
+      "orange",
+      "green",
+      "teal",
+      "blue",
+      "indigo",
+      "purple",
+      "pink",
+    ],
     count: 0,
-    custom: {},
-    current: {},
+    current: {
+      gradient: "default",
+      group: "custom",
+      step: "from",
+    },
     default: {
       title: "Hero - Bright",
       direction: "tl",
@@ -30,161 +51,63 @@ const store = {
         },
       },
     },
-    heroes: {
-      heroBright: {
-        title: "Hero - Bright",
-        direction: "tl",
-        classes: {
-          from: {
-            color: "gray",
-            shade: "400",
-          },
-          to: {
-            color: "gray",
-            shade: "100",
-          },
-        },
-      },
-      heroDark: {
-        title: "Hero - Dark",
-        direction: "tl",
-        classes: {
-          from: {
-            color: "gray",
-            shade: "900",
-          },
-          to: {
-            color: "gray",
-            shade: "500",
-          },
-        },
-      },
-      heroPurple: {
-        title: "Hero - Purple",
-        direction: "tl",
-        classes: {
-          from: {
-            color: "purple",
-            shade: "600",
-          },
-          to: {
-            color: "purple",
-            shade: "300",
-          },
-        },
-      },
-      heroNature: {
-        title: "Hero - Nature",
-        direction: "tl",
-        classes: {
-          from: {
-            color: "teal",
-            shade: "700",
-          },
-          to: {
-            color: "green",
-            shade: "300",
-          },
-        },
-      },
-      heroSky: {
-        title: "Hero - Sky",
-        direction: "tl",
-        classes: {
-          from: {
-            color: "blue",
-            shade: "700",
-          },
-          to: {
-            color: "indigo",
-            shade: "300",
-          },
-        },
-      },
-      heroPinky: {
-        title: "Hero - Pinky",
-        direction: "tl",
-        classes: {
-          from: {
-            color: "pink",
-            shade: "700",
-          },
-          to: {
-            color: "red",
-            shade: "300",
-          },
-        },
-      },
-    },
-    buttons: {
-      buttonBright: {
-        title: "Button - Bright",
-        direction: "t",
-        classes: {
-          from: {
-            color: "gray",
-            shade: "400",
-          },
-          to: {
-            color: "gray",
-            shade: "300",
-          },
-        },
-      },
-      buttonDark: {
-        title: "Button - Dark",
-        direction: "t",
-        classes: {
-          from: {
-            color: "gray",
-            shade: "700",
-          },
-          to: {
-            color: "gray",
-            shade: "600",
-          },
-        },
-      },
-    },
-    misc: {
-      equalizer: {
-        title: "Equalizer",
-        direction: "t",
-        classes: {
-          from: {
-            color: "red",
-            shade: "500",
-          },
-          via: {
-            color: "yellow",
-            shade: "500",
-          },
-          to: {
-            color: "green",
-            shade: "500",
-          },
-        },
-      },
-    },
+    gradients: store_presets,
   },
   setters: {
     count(value) {
       store.state.count = value;
     },
     default(obj) {
-      store.state.custom.default = obj;
+      store.state.gradients.custom.default = obj;
     },
     current(el) {
-      console.log(el);
+      //console.log(el);
     },
     addGradient(gradient) {
-      store.state.custom["gradient_" + Date.now()] = gradient;
+      store.state.gradients.custom["gradient_" + Date.now()] = gradient;
     },
     currentGradient(group, gradient) {
       store.state.current.gradient = gradient;
       store.state.current.group = group;
-      store.state.current.state = "from";
-      console.log(store.state.current);
+      store.state.current.step = "from";
+    },
+    step(step) {
+      store.state.current.step = step;
+
+      // Set active to preview color
+      document.querySelectorAll(`palette-color`).forEach((el) => {
+        if (el.getAttribute("step") == step) {
+          el.setAttribute("active", "true");
+        } else {
+          el.removeAttribute("active");
+        }
+      });
+
+      // Set active tab
+      document.querySelectorAll(`palette-tab-item`).forEach((el) => {
+        if (el.getAttribute("name") == step) {
+          el.setAttribute("active", "true");
+        } else {
+          el.removeAttribute("active");
+        }
+      });
+    },
+    color(color) {
+      const group = store.state.current.group;
+      const step = store.state.current.step;
+      const gradient = store.state.current.gradient;
+
+      store.state.gradients[group][gradient].classes[step].color = color;
+
+      document.querySelectorAll("preview-button").forEach((el) => {
+        el.attributeChangedCallback();
+      });
+
+      document.querySelectorAll("preview-colors").forEach((el) => {
+        el.attributeChangedCallback();
+      });
+
+      document.querySelector("preview-hero").attributeChangedCallback();
     },
   },
   getters: {
@@ -192,22 +115,31 @@ const store = {
       return store.state.count;
     },
     custom() {
-      return store.state.custom;
-    },
-    presets() {
-      return store.state.presets;
+      return store.state.gradients.custom;
     },
     heroes() {
-      return store.state.heroes;
+      return store.state.gradients.heroes;
     },
     buttons() {
-      return store.state.buttons;
+      return store.state.gradients.buttons;
     },
     misc() {
-      return store.state.misc;
+      return store.state.gradients.misc;
     },
     gradient(group, name) {
-      return store.state[group][name];
+      return store.state.gradients[group][name];
+    },
+    currentGradient() {
+      const current = store.state.current;
+      return store.state.gradients[current.group][current.gradient];
+    },
+    currentColor() {
+      const current = store.state.current;
+      return store.getters.currentGradient().classes[current.step].color;
+    },
+    currentShade() {
+      const current = store.state.current;
+      return store.getters.currentGradient().classes[current.step].shade;
     },
   },
   actions: {
@@ -222,7 +154,20 @@ const store = {
     onClickGradient(group, name) {
       store.setters.currentGradient(group, name);
       const collection = store.getters.gradient(group, name);
-      console.log(collection);
+      //console.log(collection);
+
+      // Set preview hero
+      const preview_hero = document.querySelector("preview-hero");
+      preview_hero.setAttribute("group", group);
+      preview_hero.setAttribute("name", name);
+
+      // Set preview buttons
+      document
+        .querySelectorAll("preview-button, preview-colors")
+        .forEach((el) => {
+          el.setAttribute("group", group);
+          el.setAttribute("name", name);
+        });
     },
   },
 };
@@ -247,4 +192,4 @@ if (typeof localStorage.twgd == "undefined") {
   store.getters.custom();
 }
 
-console.log(store);
+//console.log(store);

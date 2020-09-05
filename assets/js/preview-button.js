@@ -1,4 +1,4 @@
-class PreviewHero extends HTMLElement {
+class PreviewButton extends HTMLElement {
   constructor() {
     super();
   }
@@ -17,7 +17,7 @@ class PreviewHero extends HTMLElement {
 
   renderRoot() {
     return `
-    <div class="h-full ${this.classes()}"></div>
+    <button class="w-32 h-10 rounded-full focus:outline-none ${this.classes()}"></button>
     `;
   }
 
@@ -30,4 +30,4 @@ class PreviewHero extends HTMLElement {
   }
 }
 
-customElements.define("preview-hero", PreviewHero);
+customElements.define("preview-button", PreviewButton);
