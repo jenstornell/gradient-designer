@@ -44,4 +44,10 @@ const store_actions = {
       el.connectedCallback();
     });
   },
+  selectText(el) {
+    const range = document.createRange();
+    range.selectNode(el);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+  },
 };

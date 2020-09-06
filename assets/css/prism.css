@@ -56,8 +56,9 @@ code[class*="language-"] ::selection {
 /* Code blocks */
 pre[class*="language-"] {
   padding: 1em;
-  margin: 0.5em 0;
   overflow: auto;
+  height: auto;
+  max-height: 100%;
 }
 
 :not(pre) > code[class*="language-"],

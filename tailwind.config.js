@@ -9,6 +9,14 @@ module.exports = {
     extend: {},
     fontFamily: {
       body: ["Poppins"],
+      mono: [
+        "Menlo",
+        "Monaco",
+        "Consolas",
+        "Liberation Mono",
+        "Courier New",
+        "monospace",
+      ],
     },
     screens: {
       sm: "840px",

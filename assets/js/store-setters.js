@@ -25,6 +25,9 @@ const store_setters = {
   step(step) {
     store.state.current.step = step;
     store.actions.render("palette-tabs");
+    store.actions.render("export-code");
+
+    Prism.highlightAll();
 
     // Set active to preview color
     document.querySelectorAll(`palette-color`).forEach((el) => {

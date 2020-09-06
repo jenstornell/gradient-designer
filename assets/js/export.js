@@ -5,7 +5,18 @@ class ExportCode extends HTMLElement {
 
   renderRoot() {
     return `
-    <pre><code class="language-json">p { color: red }</code></pre>`;
+      <div class="${
+        store.state.current.step == "export" ? "" : "hidden"
+      } gap-2 flex flex-col">
+      <div class="font-bold text-sm uppercase">Export</div>
+      <textarea spellcheck="false" class="cursor-auto resize-none h-32 focus:outline-none bg-gray-200 text-sm font-mono">${JSON.stringify(
+        store.state.gradients.custom
+      )}</textarea>
+        <div class="flex justify-end">
+          <button class="from-gray-300 via-gray-300 to-gray-200 bg-gradient-to-t cursor-default focus:outline-none border border-gray-400 text-xs hover:border-gray-500 font-bold uppercase text-gray-800 rounded-full px-3 py-1">Select all</button>
+        </div>
+      </div>
+    `;
   }
 
   activeClasses() {
@@ -13,12 +24,16 @@ class ExportCode extends HTMLElement {
     return this.step == currentStep ? "bg-white border-gray-400 topshadow" : "";
   }
 
-  attributeChangedCallback() {
+  connectedCallback() {
+    if (store.state.current.step !== "export") return;
     this.innerHTML = this.renderRoot();
+    this.onClick();
   }
 
-  connectedCallback() {
-    this.innerHTML = this.renderRoot();
+  onClick() {
+    this.querySelector("button").addEventListener("click", () => {
+      store.actions.selectText(document.querySelector("export-code textarea"));
+    });
   }
 }
 

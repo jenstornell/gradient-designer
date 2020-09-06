@@ -36,7 +36,7 @@ class PaletteColors extends HTMLElement {
     return `<div class="inline-grid gap-1" style="grid-auto-rows: 32px; grid-template-columns: repeat(5, 32px);">${html}</div>`;
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback() {
     this.innerHTML = this.renderRoot();
     this.onClick();
   }
