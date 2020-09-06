@@ -1,17 +1,19 @@
 class PaletteTabs extends HTMLElement {
   constructor() {
     super();
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
   renderRoot() {
     return `
     <div class="select-none cursor-default px-4 pt-3 bg-gray-300">
       <div class="flex">   
-        <palette-tab-item name="from" title="From" active="true"></palette-tab-item>
-        <palette-tab-item name="via" title="Via"></palette-tab-item>
-        <palette-tab-item name="to" title="To"></palette-tab-item>
+        <palette-tab-item step="from"></palette-tab-item>
+        <palette-tab-item step="via"></palette-tab-item>
+        <palette-tab-item step="to"></palette-tab-item>
+        <palette-tab-item step="code" class="ml-auto"></palette-tab-item>
+        <palette-tab-item step="export"></palette-tab-item>
+        <palette-tab-item step="import"></palette-tab-item>
+        <palette-tab-item step="about"></palette-tab-item>
       </div>
     </div>
     `;
@@ -24,14 +26,12 @@ class PaletteTabs extends HTMLElement {
 
   onClick() {
     this.querySelectorAll("palette-tab-item").forEach((item) => {
-      item.addEventListener("click", this.handleClick, false);
+      item.addEventListener("click", this.handleClick.bind(this), false);
     });
   }
 
   handleClick(e) {
-    const el = this.querySelector(`palette-tab-item[active="true"]`);
-    el.removeAttribute("active");
-    e.currentTarget.setAttribute("active", "true");
+    store.setters.step(e.currentTarget.getAttribute("step"));
   }
 }
 

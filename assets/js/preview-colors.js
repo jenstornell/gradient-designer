@@ -3,18 +3,6 @@ class PreviewColors extends HTMLElement {
     super();
   }
 
-  static get observedAttributes() {
-    return ["name", "group"];
-  }
-
-  get name() {
-    return this.getAttribute("name");
-  }
-
-  get group() {
-    return this.getAttribute("group");
-  }
-
   renderRoot() {
     return `
     <div class="flex gap-1">
@@ -26,7 +14,7 @@ class PreviewColors extends HTMLElement {
   items() {
     let html = "";
 
-    const obj = store.state.gradients[this.group][this.name].classes;
+    const obj = store.getters.currentGradient().classes;
 
     for (const key in obj) {
       const item = obj[key];
@@ -45,7 +33,7 @@ class PreviewColors extends HTMLElement {
     return key == store.state.current.step ? ` active="true"` : "";
   }
 
-  attributeChangedCallback() {
+  connectedCallback() {
     this.innerHTML = this.renderRoot();
     this.onClick();
   }

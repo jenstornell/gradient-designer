@@ -50,7 +50,6 @@ class PaletteColors extends HTMLElement {
     this.querySelectorAll("palette-color").forEach((el) => {
       el.addEventListener("click", (e) => {
         const color = e.currentTarget.getAttribute("color");
-        console.log(color);
 
         store.setters.color(color);
       });

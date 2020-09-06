@@ -1,0 +1,45 @@
+const store_settings = {
+  hasShades: [
+    "gray",
+    "red",
+    "yellow",
+    "orange",
+    "green",
+    "teal",
+    "blue",
+    "indigo",
+    "purple",
+    "pink",
+  ],
+  allowedColors: [
+    "transparent",
+    "current",
+    "black",
+    "white",
+    "gray",
+    "red",
+    "yellow",
+    "orange",
+    "green",
+    "teal",
+    "blue",
+    "indigo",
+    "purple",
+    "pink",
+  ],
+  isTransparent: ["transparent"],
+  default: {
+    title: "Hero - Bright",
+    direction: "tl",
+    classes: {
+      from: {
+        color: "gray",
+        shade: "400",
+      },
+      to: {
+        color: "gray",
+        shade: "100",
+      },
+    },
+  },
+};

@@ -3,25 +3,17 @@ class PreviewGradient extends HTMLElement {
     super();
   }
 
-  static get observedAttributes() {
-    return ["from", "via", "to"];
-  }
-
-  get from() {
-    return this.getAttribute("from");
-  }
-
   renderRoot() {
     return `
-    <div class="bg-gradient-to-r from-${this.from}"></div>
+    <div class="h-full ${store.getters.currentToClasses()}"></div>
     `;
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  connectedCallback() {
     this.innerHTML = this.renderRoot();
   }
 
-  connectedCallback(name, oldval, newval) {
+  attributeChangedCallback() {
     this.innerHTML = this.renderRoot();
   }
 }

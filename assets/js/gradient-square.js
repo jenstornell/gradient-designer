@@ -94,7 +94,7 @@ class GradientSquare extends HTMLElement {
 
       el.setAttribute("active", "true");
 
-      store.actions.onClickGradient(this.group, this.key);
+      store.setters.currentGradient(this.group, this.key);
     });
   }
 }

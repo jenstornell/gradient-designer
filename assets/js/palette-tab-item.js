@@ -4,43 +4,28 @@ class PaletteTabItem extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["color", "shade", "active"];
+    return ["step"];
   }
 
-  get active() {
-    return this.getAttribute("active") == "true" ? true : false;
-  }
-
-  get color() {
-    return this.getAttribute("color");
-  }
-
-  get shade() {
-    return this.getAttribute("shade");
-  }
-
-  get title() {
-    return this.getAttribute("title");
+  get step() {
+    return this.getAttribute("step");
   }
 
   renderRoot() {
     return `
       <div class="flex relative rounded-t ${this.activeClasses()} px-4 py-2">
         <div class="relative gap-2 flex items-center">
-          ${this.title}
+          ${this.step.capitalize()}
         </div>
       </div>`;
   }
 
-  shadeValue() {
-    return this.shade ? `shade="${this.shade}"` : "";
-  }
-
   activeClasses() {
-    return this.active ? "bg-white border-gray-400 topshadow" : "";
+    const currentStep = store.state.current.step;
+    return this.step == currentStep ? "bg-white border-gray-400 topshadow" : "";
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback() {
     this.innerHTML = this.renderRoot();
   }
 
