@@ -5,6 +5,11 @@ const store_setters = {
   default(obj) {
     store.state.gradients.custom.default = obj;
   },
+  title(title) {
+    store.getters.currentGradient().title = title;
+    console.log(store.state);
+    store.actions.render('gradient-squares[group="custom"]');
+  },
   current(el) {},
   addGradient() {
     const gradient = store.getters.currentGradient();
@@ -48,21 +53,19 @@ const store_setters = {
   custom(data) {
     store.state.gradients.custom = JSON.parse(data);
     const first_key = Object.keys(store.state.gradients.custom)[0];
-
     store.setters.currentGradient("custom", first_key);
-
     store.actions.render("gradient-squares");
-
-    console.log(store);
-
     store.actions.activateFirstGradient();
-
-    // store.actions.render("colors-pane");
-    //store.actions.render("preview-gradient, preview-colors");
-
-    /*
-    {"default":{"title":"Hero - Bright","direction":"tl","classes":{"from":{"color":"gray","shade":"400"},"to":{"color":"red","shade":"500"}}}}
-    */
+  },
+  customAdd(data) {
+    store.state.gradients.custom = Object.assign(
+      store.state.gradients.custom,
+      JSON.parse(data)
+    );
+    const first_key = Object.keys(store.state.gradients.custom)[0];
+    store.setters.currentGradient("custom", first_key);
+    store.actions.render("gradient-squares");
+    store.actions.activateFirstGradient();
   },
   color(color) {
     store.getters.currentStep().color = color;

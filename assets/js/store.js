@@ -14,6 +14,7 @@ if (typeof localStorage.twgd == "undefined") {
     gradient: "default",
     group: "custom",
     tab: "from",
+    prefix: "",
   });
 }
 
