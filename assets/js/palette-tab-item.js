@@ -4,25 +4,25 @@ class PaletteTabItem extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["step"];
+    return ["tab"];
   }
 
-  get step() {
-    return this.getAttribute("step");
+  get tab() {
+    return this.getAttribute("tab");
   }
 
   renderRoot() {
     return `
       <div class="flex relative rounded-t ${this.activeClasses()} px-4 py-2">
         <div class="relative gap-2 flex items-center">
-          ${this.step.capitalize()}
+          ${this.tab.capitalize()}
         </div>
       </div>`;
   }
 
   activeClasses() {
-    const currentStep = store.state.current.step;
-    return this.step == currentStep ? "bg-white border-gray-400 topshadow" : "";
+    const currentTab = store.state.current.tab;
+    return this.tab == currentTab ? "bg-white border-gray-400 topshadow" : "";
   }
 
   attributeChangedCallback() {

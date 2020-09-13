@@ -13,8 +13,8 @@ class GradientSquare extends HTMLElement {
     return true;
   }
 
-  get key() {
-    return this.getAttribute("key");
+  get name() {
+    return this.getAttribute("name");
   }
 
   get group() {
@@ -50,7 +50,7 @@ class GradientSquare extends HTMLElement {
   }
 
   data() {
-    return store.state.gradients[this.group][this.key];
+    return store.state.gradients[this.group][this.name];
   }
 
   renderRoot() {
@@ -94,7 +94,7 @@ class GradientSquare extends HTMLElement {
 
       el.setAttribute("active", "true");
 
-      store.setters.currentGradient(this.group, this.key);
+      store.setters.currentGradient(this.group, this.name);
     });
   }
 }

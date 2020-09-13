@@ -1,4 +1,4 @@
-class ExportCode extends HTMLElement {
+class PaneExport extends HTMLElement {
   constructor() {
     super();
   }
@@ -6,10 +6,10 @@ class ExportCode extends HTMLElement {
   renderRoot() {
     return `
       <div class="${
-        store.state.current.step == "export" ? "" : "hidden"
-      } gap-2 flex flex-col">
+        store.state.current.tab == "export" ? "" : "hidden"
+      } gap-2 flex flex-col w-full">
       <div class="font-bold text-sm uppercase">Export</div>
-      <textarea spellcheck="false" class="cursor-auto resize-none h-32 focus:outline-none bg-gray-200 text-sm font-mono">${JSON.stringify(
+      <textarea spellcheck="false" class="border cursor-auto resize-none h-32 focus:outline-none bg-gray-200 text-sm font-mono">${JSON.stringify(
         store.state.gradients.custom
       )}</textarea>
         <div class="flex justify-end">
@@ -20,21 +20,20 @@ class ExportCode extends HTMLElement {
   }
 
   activeClasses() {
-    const currentStep = store.state.current.step;
-    return this.step == currentStep ? "bg-white border-gray-400 topshadow" : "";
+    const currentTab = store.state.current.tab;
+    return this.tab == currentTab ? "bg-white border-gray-400 topshadow" : "";
   }
 
   connectedCallback() {
-    if (store.state.current.step !== "export") return;
     this.innerHTML = this.renderRoot();
     this.onClick();
   }
 
   onClick() {
     this.querySelector("button").addEventListener("click", () => {
-      store.actions.selectText(document.querySelector("export-code textarea"));
+      store.actions.selectText(document.querySelector("pane-export textarea"));
     });
   }
 }
 
-customElements.define("export-code", ExportCode);
+customElements.define("pane-export", PaneExport);

@@ -11,37 +11,63 @@ const store_setters = {
     const unique = `gradient_${Date.now()}`;
 
     store.state.gradients.custom[unique] = gradient;
-
-    store.actions.updateCustomGradients();
+    store.actions.render('gradient-squares[group="custom"]');
     store.actions.activateGradient(unique);
+    store.actions.render("pane-export");
+  },
+  currentAll(current_obj) {
+    store.state.current = current_obj;
   },
   currentGradient(group, gradient) {
     store.state.current.gradient = gradient;
     store.state.current.group = group;
-    store.state.current.step = "from";
 
     store.actions.render("preview-gradient, preview-colors");
   },
-  step(step) {
-    store.state.current.step = step;
+  tab(tab) {
+    store.state.current.tab = tab;
     store.actions.render("palette-tabs");
-    store.actions.render("export-code");
+    store.actions.render("pane-export");
+    store.actions.render("colors-pane");
+    store.actions.render("pane-about");
+    store.actions.render("pane-direction");
+    store.actions.render("pane-import");
 
     Prism.highlightAll();
 
     // Set active to preview color
     document.querySelectorAll(`palette-color`).forEach((el) => {
-      if (el.getAttribute("step") == step) {
+      if (el.getAttribute("step") == tab) {
         el.setAttribute("active", "true");
       } else {
         el.removeAttribute("active");
       }
     });
   },
+  custom(data) {
+    store.state.gradients.custom = JSON.parse(data);
+    const first_key = Object.keys(store.state.gradients.custom)[0];
+
+    store.setters.currentGradient("custom", first_key);
+
+    store.actions.render("gradient-squares");
+
+    // store.actions.render("colors-pane");
+    //store.actions.render("preview-gradient, preview-colors");
+
+    /*
+    {"default":{"title":"Hero - Bright","direction":"tl","classes":{"from":{"color":"gray","shade":"400"},"to":{"color":"red","shade":"500"}}}}
+    */
+  },
   color(color) {
     store.getters.currentStep().color = color;
 
     store.actions.updatePreviewColors();
     store.actions.updatePreviewGradients();
+  },
+  direction(direction) {
+    store.getters.currentGradient().direction = direction;
+    store.actions.render("preview-gradient");
+    store.actions.render("gradient-squares");
   },
 };

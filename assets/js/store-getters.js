@@ -22,6 +22,9 @@ const store_getters = {
     const current = store.state.current;
     return store.getters.currentGradient().classes[current.step];
   },
+  currentDirection() {
+    return store.getters.currentGradient().direction;
+  },
   currentColor() {
     const current = store.state.current;
     return store.getters.currentGradient().classes[current.step].color;

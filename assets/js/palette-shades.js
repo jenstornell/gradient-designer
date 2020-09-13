@@ -44,22 +44,8 @@ class PaletteShades extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = this.renderRoot();
-    //this.onClick();
     this.querySelector('[shade="500"]').setAttribute("active", "true");
   }
-
-  /*onClick() {
-    this.querySelectorAll("palette-color").forEach((item) => {
-      item.addEventListener("click", (e) => {
-        const current = e.currentTarget;
-
-        store[store.state][store.step] = {
-          color: current.color,
-          shade: current.shade,
-        };
-      });
-    });
-  }*/
 }
 
 customElements.define("palette-shades", PaletteShades);

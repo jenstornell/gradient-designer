@@ -30,7 +30,7 @@ class PreviewColors extends HTMLElement {
   }
 
   active(key) {
-    return key == store.state.current.step ? ` active="true"` : "";
+    return key == store.state.current.tab ? ` active="true"` : "";
   }
 
   connectedCallback() {
@@ -41,7 +41,7 @@ class PreviewColors extends HTMLElement {
   onClick() {
     this.querySelectorAll("palette-color").forEach((item) => {
       item.addEventListener("click", (e) => {
-        store.setters.step(e.currentTarget.getAttribute("step"));
+        store.setters.tab(e.currentTarget.getAttribute("step"));
       });
     });
   }

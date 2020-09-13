@@ -10,11 +10,11 @@ const store = {
 
 if (typeof localStorage.twgd == "undefined") {
   store.setters.default(store.state.settings.default);
-  store.state.current = {
+  store.setters.currentAll({
     gradient: "default",
     group: "custom",
-    step: "from",
-  };
+    tab: "from",
+  });
 }
 
 console.log("STORE");
