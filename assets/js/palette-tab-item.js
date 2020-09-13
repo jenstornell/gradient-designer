@@ -13,7 +13,7 @@ class PaletteTabItem extends HTMLElement {
 
   renderRoot() {
     return `
-      <div class="flex relative rounded-t ${this.activeClasses()} px-4 py-2">
+      <div class="flex relative rounded-t ${this.activeClasses()} px-3 py-2">
         <div class="relative gap-2 flex items-center">
           ${this.tab.capitalize()}
         </div>

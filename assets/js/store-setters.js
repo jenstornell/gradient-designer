@@ -32,6 +32,7 @@ const store_setters = {
     store.actions.render("pane-about");
     store.actions.render("pane-direction");
     store.actions.render("pane-import");
+    store.actions.render("pane-profile");
 
     Prism.highlightAll();
 
@@ -51,6 +52,10 @@ const store_setters = {
     store.setters.currentGradient("custom", first_key);
 
     store.actions.render("gradient-squares");
+
+    console.log(store);
+
+    store.actions.activateFirstGradient();
 
     // store.actions.render("colors-pane");
     //store.actions.render("preview-gradient, preview-colors");

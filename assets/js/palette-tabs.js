@@ -11,6 +11,7 @@ class PaletteTabs extends HTMLElement {
         <palette-tab-item tab="via"></palette-tab-item>
         <palette-tab-item tab="to"></palette-tab-item>
         <palette-tab-item tab="direction"></palette-tab-item>
+        <palette-tab-item tab="profile"></palette-tab-item>
         <palette-tab-item tab="code" class="ml-auto"></palette-tab-item>
         <palette-tab-item tab="export"></palette-tab-item>
         <palette-tab-item tab="import"></palette-tab-item>

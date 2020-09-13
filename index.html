@@ -101,7 +101,7 @@
           <pane-about></pane-about>
           <pane-direction></pane-direction>
           <pane-import></pane-import>
-
+          <pane-profile></pane-profile>
 
         </div>
         <!--
@@ -175,7 +175,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', (event) => {
-      store.actions.render(`gradient-squares[group="custom"]`);
+      document.querySelector('gradient-square').setAttribute('active', "true");
     });
   </script>
   <script src="assets/js/palette-colors.js"></script>
@@ -195,6 +195,7 @@
   <script src="assets/js/pane-direction.js"></script>
   <script src="assets/js/pane-import.js"></script>
   <script src="assets/js/pane-export.js"></script>
+  <script src="assets/js/pane-profile.js"></script>
   <script src="assets/js/prism.js"></script>
 
   <script>

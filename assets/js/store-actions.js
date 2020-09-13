@@ -20,6 +20,9 @@ const store_actions = {
       el.connectedCallback();
     });
   },
+  activateFirstGradient() {
+    document.querySelector(`gradient-square`).setAttribute("active", "true");
+  },
   selectText(el) {
     const range = document.createRange();
     range.selectNode(el);
