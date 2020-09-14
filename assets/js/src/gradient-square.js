@@ -58,7 +58,7 @@ class GradientSquare extends HTMLElement {
     <div class="bg-gradient-to-${
       this.data().direction
     } flex items-center justify-center w-16 h-16 ${this.classes()} rounded" title="${
-      this.title
+      this.data().title
     }">
       ${this.renderActive()}
     </div>
@@ -72,7 +72,7 @@ class GradientSquare extends HTMLElement {
     `;
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name) {
     this.innerHTML = this.renderRoot();
     if (name == "active" && this.active) {
       store.setters.current(this);
