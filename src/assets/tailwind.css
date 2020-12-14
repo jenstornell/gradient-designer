@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.transform-top-center {
+  transform: translate(-50%, 0);
+}
+
+.transform-bottom-center {
+  transform: translate(-50%, 0) rotate(180deg);
+}
+
+.transform-left-center {
+  transform: translate(0, -50%) rotate(-90deg);
+}
+
+.transform-right-center {
+  transform: translate(0, -50%) rotate(90deg);
+}
