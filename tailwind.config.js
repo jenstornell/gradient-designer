@@ -4,6 +4,9 @@ module.exports = {
   purge: {
     //enabled: true,
     content: ["./src/**/*.vue", "./public/**/*.html"],
+    options: {
+      safelist: [/^bg-gradient-to-/, /^from-/, /^via-/, /^to-/, /^bg-/],
+    },
   },
   darkMode: false, // or 'media' or 'class'
   theme: {

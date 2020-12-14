@@ -28,14 +28,6 @@
           </li>
           <li>
             <a
-              href="https://feathericons.com/"
-              target="_blank"
-              class="block py-0.5 text-lightBlue-600 hover:underline"
-              >FeatherIcons</a
-            >
-          </li>
-          <li>
-            <a
               href="https://remixicon.com/"
               target="_blank"
               class="text-lightBlue-600 py-0.5 block hover:underline"
@@ -92,7 +84,7 @@
         </div>
         <div>
           <a
-            href="https://github.com/jenstornell/tailwind-gradient-designer"
+            href="https://github.com/jenstornell/gradient-designer"
             target="_blank"
           >
             <svg

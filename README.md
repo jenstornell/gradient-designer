@@ -1,19 +1,67 @@
-# Tailwind Gradient Designer
+# Gradient Designer
+
+Version 2 - [Changelog](CHANGELOG.md)
 
 Visit [Tailwind Gradient Designer](http://tailwind-gradient-designer.csspost.com/).
 
-Feel free to add any issues you encounter.
+## In short
 
-## Version 2 - Will be out soon
+- Design gradients and store them locally (local storage)
+- Uses the colors and shades from TailwindCSS 2
+- Export the code as TailwindCSS classes or native CSS
+- 26 colors and 220 shades to choose from
+- Maximal use of screen space
 
-I've already started on version 2. Therefor the code in this repo looks a bit messy right now.
+## Usage
 
-### Future possible features
+### Gradient - Add
 
-- More space on screen to be used
-- A complete new UI
-- Will not use any PHP, just pure vanilla JS
-- Support for pseudo classes in code output
-- Better preview - 3 preview modes, large, button on white and button on black
-- Memory with local storage
-- Presets
+Add a gradient with the plus sign at the top. When you have added the gradient, click on it to select it.
+
+### Gradient - Colors
+
+When you have a gradient selected, you will see three tabs.
+
+The first color is the "from" color. It's required in order for the gradient to work. The middle color is called "via" and the last is called "to".
+
+There is also a "active" switch to toggle the color on or off. Make sure that at least the "from" color is active.
+
+### Gradient - Shades
+
+For most of the colors there are also 10 different shades. Transparent, current, black and white does not have any shades.
+
+### Gradient - Preview
+
+There is a big preview area showing the gradient. Below it are preview boxes to show how the gradient work as a button and which individual colors are used.
+
+### Gradient - Directions
+
+You can change the gradient direction by using the arrows placed on the gradient preview.
+
+### Gradient - Delete
+
+You can delete the gradient by using the trash icon placed on the gradient preview.
+
+### Gradient - Code
+
+When you are satisfied with your gradient, you can get the code for it.
+
+You can get the code as Tailwind classes or as native CSS.
+
+If you use Tailwind and need it with pseudo classes, you can use the prefix feature.
+
+### Gradient - Info
+
+If you want, you can give the gradient a name. You can do that by clicking the info icon on the gradient preview.
+
+## Report issues
+
+Please report any issues you encounter.
+
+## Donate
+
+Donate to [DevoneraAB](https://www.paypal.me/DevoneraAB) to support my work.
+
+## License
+
+The tool is free to use

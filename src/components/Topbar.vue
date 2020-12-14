@@ -2,7 +2,12 @@
   <div
     class="flex items-center justify-between px-4 py-2 text-2xl font-bold text-white bg-gray-800 font-heading"
   >
-    <div>Gradient Generator</div>
+    <div>
+      Gradient Generator
+      <span class="text-base font-normal text-gray-500 font-body"
+        >Minefield 2.0</span
+      >
+    </div>
     <div class="flex items-center gap-4">
       <!--
       <div
