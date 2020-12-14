@@ -5,7 +5,7 @@
     v-if="store.state.modal"
   >
     <div class="flex flex-col max-w-screen-sm gap-4 p-8 bg-white rounded-lg">
-      <h1 class="text-4xl font-bold font-heading">Gradient Generator</h1>
+      <h1 class="text-4xl font-bold font-heading">Gradient Designer</h1>
 
       <div class="flex flex-col gap-2">
         <p>
