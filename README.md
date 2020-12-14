@@ -1,8 +1,8 @@
 # Gradient Designer
 
-Version 2 - [Changelog](CHANGELOG.md)
+**Version 2** - [Changelog](CHANGELOG.md)
 
-Visit [Tailwind Gradient Designer](http://tailwind-gradient-designer.csspost.com/).
+Visit [Gradient Designer](https://gradient-designer.csspost.com/).
 
 ## In short
 
@@ -11,6 +11,8 @@ Visit [Tailwind Gradient Designer](http://tailwind-gradient-designer.csspost.com
 - Export the code as TailwindCSS classes or native CSS
 - 26 colors and 220 shades to choose from
 - Maximal use of screen space
+
+![Screenshot](screenshot.png)
 
 ## Usage
 
