@@ -2,7 +2,9 @@
 
 **Version 2** - [Changelog](CHANGELOG.md)
 
-Visit [Gradient Designer](https://gradient-designer.csspost.com/).
+[![Screenshot](screenshot.png)](https://gradient-designer.csspost.com/)
+
+**Visit [Gradient Designer](https://gradient-designer.csspost.com/).**
 
 ## In short
 
@@ -11,8 +13,6 @@ Visit [Gradient Designer](https://gradient-designer.csspost.com/).
 - Export the code as TailwindCSS classes or native CSS
 - 26 colors and 220 shades to choose from
 - Maximal use of screen space
-
-![Screenshot](screenshot.png)
 
 ## Usage
 
