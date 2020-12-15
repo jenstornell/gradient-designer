@@ -1,0 +1,2 @@
+RewriteEngine on 
+RewriteRule ^(.*)$ https://gradient-designer.csspost.com/$1 [R=301,L]
