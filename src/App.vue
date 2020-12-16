@@ -11,7 +11,7 @@
 <script>
 import Sidebar from "@/components/Sidebar.vue";
 import Main from "@/components/Main.vue";
-import ModalAbout from "@/components/ModalAbout.vue";
+import ModalAbout from "@/components/modals/ModalAbout.vue";
 import Topbar from "@/components/Topbar.vue";
 import SelectSet from "@/components/SelectSet.vue";
 import global from "@/global.js";

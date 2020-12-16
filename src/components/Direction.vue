@@ -5,8 +5,9 @@
   >
     <DirectionArrow direction="bl" classes="rotate-45" />
     <GradientDelete />
-    <Output />
+    <ModalCode />
     <ModalGradientInfo />
+    <ModalPortGradient />
   </div>
   <DirectionArrow
     direction="tr"
@@ -39,15 +40,17 @@
 import { inject } from "vue";
 import DirectionArrow from "@/components/DirectionArrow.vue";
 import GradientDelete from "@/components/GradientDelete.vue";
-import Output from "@/components/Output.vue";
-import ModalGradientInfo from "@/components/ModalGradientInfo.vue";
+import ModalCode from "@/components/modals/ModalCode.vue";
+import ModalGradientInfo from "@/components/modals/ModalGradientInfo.vue";
+import ModalPortGradient from "@/components/modals/ModalPortGradient.vue";
 
 export default {
   components: {
     DirectionArrow,
     GradientDelete,
-    Output,
+    ModalCode,
     ModalGradientInfo,
+    ModalPortGradient,
   },
   setup() {
     const store = inject("global");

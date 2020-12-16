@@ -1,6 +1,6 @@
 # Gradient Designer
 
-**Version 2** - [Changelog](CHANGELOG.md)
+**Version 2.1** - [Changelog](CHANGELOG.md)
 
 **[Old version 1 - For Tailwind 1](https://gradient-designer.csspost.com/v1.0/)**
 

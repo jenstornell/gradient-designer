@@ -44,7 +44,6 @@
 import Palette from "@/components/Palette.vue";
 import Shade from "@/components/Shade.vue";
 import Tabs from "@/components/Tabs.vue";
-import Output from "@/components/Output.vue";
 import Port from "@/components/Port.vue";
 
 import PreviewMix from "@/components/PreviewMix.vue";
@@ -79,7 +78,7 @@ export default {
       }
     });
 
-    return { store, isEmpty, Output, root };
+    return { store, isEmpty, root };
   },
 };
 </script>

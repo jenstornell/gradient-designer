@@ -1,5 +1,11 @@
 # Changelog
 
+## Minefield v2.1
+
+- Port gradient modal
+- Export current gradient as JSON
+- Import current gradient as JSON
+
 ## Minefield v2.0
 
 - Possible to add/delete unlimited gradients
