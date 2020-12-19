@@ -18,7 +18,8 @@
       -->
       <div
         class="p-2 text-white rounded-full fill-current hover:bg-gray-700"
-        @click="modalOpen()"
+        @click="setModal(true)"
+        title="About"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -37,17 +38,13 @@
 </template>
 
 <script>
-import { inject } from "vue";
+import vclone from "@/vclone/";
 
 export default {
   setup() {
-    const store = inject("global");
+    const { setModal } = vclone;
 
-    function modalOpen() {
-      store.state.modal = true;
-    }
-
-    return { modalOpen };
+    return { setModal };
   },
 };
 </script>

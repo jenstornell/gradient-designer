@@ -2,7 +2,7 @@
   <div class="flex flex-col items-end gap-2 mt-2 mr-2">
     <div
       class="flex items-center justify-center p-2 text-white text-opacity-50 bg-black bg-opacity-25 rounded-full fill-current hover:bg-opacity-50 hover:text-opacity-100 focus:outline-none hover:opacity-100"
-      title="Get code"
+      title="Code"
       @click="setModal(true)"
     >
       <svg
@@ -35,7 +35,7 @@
           <input
             id="prefix"
             type="text"
-            v-model="store.state.prefix"
+            v-model="prefix"
             class="w-64 p-2 bg-gray-100 rounded ring-2 ring-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400"
             spellcheck="false"
             autocomplete="off"
@@ -65,7 +65,7 @@
               :key="`out_class_${index}`"
             >
               <span class="text-red-800" v-show="{ hidden: index == 0 }">{{
-                store.state.prefix
+                prefix
               }}</span
               >{{ item }}&nbsp;</span
             >
@@ -131,6 +131,7 @@ export default {
   },
   setup() {
     const store = inject("global");
+    const prefix = ref("");
     let modal = ref(false);
 
     function setModal(value) {
@@ -143,7 +144,7 @@ export default {
       this.modal = false;
     }
 
-    return { store, modal, setModal, closeModal };
+    return { store, modal, setModal, closeModal, prefix };
   },
 };
 </script>

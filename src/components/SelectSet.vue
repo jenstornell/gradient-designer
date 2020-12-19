@@ -1,7 +1,7 @@
 <template>
   <div class="px-4 text-gray-500 uppercase bg-gray-800">
     <strong>set:</strong>
-    {{ store.state.currentSetName }}
+    Default
   </div>
 </template>
 

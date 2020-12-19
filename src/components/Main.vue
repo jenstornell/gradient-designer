@@ -7,32 +7,29 @@
       <Tabs />
 
       <div class="flex flex-col flex-1">
-        <div v-for="stop in store.state.stops" :key="`palette-${stop}`">
+        <div v-for="stop in state.stops" :key="`palette-${stop}`">
           <div
             :class="{
-              hidden: store.state.tabActive != stop,
+              hidden: state.stop_active != stop,
             }"
-            class="flex flex-col gap-4 p-4 bg-white"
+            class="flex flex-col gap-4 p-4 border-b shadow-b-2xl bg-gradient-to-b from-white"
           >
-            <Palette :title="stop" :state="stop" />
-            <Shade :state="stop" />
+            <Palette :title="stop" :stop="stop" />
+            <Shade :stop="stop" />
           </div>
         </div>
         <Port />
       </div>
 
       <div
-        v-if="store.state.tabs_left.includes(store.state.tabActive)"
+        v-if="state.stops.includes(state.stop_active)"
         class="relative h-full min-h-64"
         :class="store.outputClasses.value"
         ref="root"
       >
         <Direction />
       </div>
-      <div
-        class="flex"
-        v-if="store.state.tabs_left.includes(store.state.tabActive)"
-      >
+      <div class="flex" v-if="state.stops.includes(state.stop_active)">
         <PreviewMix type="white" />
         <PreviewMix type="black" />
       </div>
@@ -50,6 +47,7 @@ import PreviewMix from "@/components/PreviewMix.vue";
 import Direction from "@/components/Direction.vue";
 
 import { inject, watchEffect, ref } from "vue";
+import vclone from "@/vclone/";
 
 export default {
   components: {
@@ -62,6 +60,8 @@ export default {
     PreviewMix,
   },
   setup() {
+    const { state } = vclone;
+
     const store = inject("global");
     const root = ref(null);
 
@@ -78,7 +78,7 @@ export default {
       }
     });
 
-    return { store, isEmpty, root };
+    return { store, isEmpty, root, state };
   },
 };
 </script>

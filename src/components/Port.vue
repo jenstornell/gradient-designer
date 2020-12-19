@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ hidden: store.state.tabActive != 'port' }"
+    :class="{ hidden: state.stop_active != 'port' }"
     class="flex flex-col flex-1 gap-8 px-8 py-6 bg-gray-100"
   >
     <div class="flex flex-col gap-1">
@@ -21,6 +21,7 @@
 <script>
 import { inject } from "vue";
 import HeadingSmall from "@/components/HeadingSmall.vue";
+import vclone from "@/vclone/";
 
 export default {
   components: {
@@ -28,8 +29,9 @@ export default {
   },
   setup() {
     const store = inject("global");
+    const { state } = vclone;
 
-    return { store };
+    return { store, state };
   },
 };
 </script>

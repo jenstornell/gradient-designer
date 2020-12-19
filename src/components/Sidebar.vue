@@ -16,7 +16,7 @@
               v-for="(gradient, key) in set.gradients"
               :key="`gradient-${index}-${key}`"
               class="flex items-center justify-center w-12 h-12 text-gray-300 rounded-md ring-2 ring-black ring-opacity-25 ring-offset-0 ring-offset-gray-800"
-              :class="store.outputClasses2(gradient)"
+              :class="outputClasses2(gradient)"
               :title="gradient.name"
               @click="setGradient(gradient, set.name)"
             >
@@ -29,6 +29,7 @@
             <button
               @click="store.addGradient(set)"
               class="flex items-center justify-center w-12 h-12 text-white rounded-md focus:outline-none hover:bg-gray-700"
+              title="Add"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +57,7 @@
 <script>
 import { inject } from "vue";
 import Dot from "@/components/Dot.vue";
+import vclone from "@/vclone/";
 
 export default {
   components: {
@@ -63,14 +65,15 @@ export default {
   },
   setup() {
     const store = inject("global");
+    const { outputClasses2 } = vclone;
 
-    function setGradient(gradient, setName) {
+    function setGradient(gradient) {
       store.state.currentGradient = gradient;
-      store.state.currentSetName = setName;
+      //store.state.currentSetName = setName;
 
       //store.state.currentGradient.name = "whatever";
     }
-    return { store, setGradient };
+    return { store, setGradient, outputClasses2 };
   },
 };
 </script>

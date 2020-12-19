@@ -1,44 +1,7 @@
 import { reactive, computed, watchEffect } from "vue";
 
-/*const cache = {
-  items: [],
-};*/
 const state = reactive({
-  shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900],
-  prefix: "",
-  modal: false,
-  stops: ["from", "via", "to"],
-  tabs_left: ["from", "via", "to"],
-  tabActive: "from",
-  colors: ["transparent", "current", "black", "white"],
-  grays: [],
-  output_css: "",
-  colorsWithShades: [
-    "blueGray",
-    "coolGray",
-    "gray",
-    "trueGray",
-    "warmGray",
-    "red",
-    "orange",
-    "amber",
-    "yellow",
-    "lime",
-    "green",
-    "emerald",
-    "teal",
-    "cyan",
-    "lightBlue",
-    "blue",
-    "indigo",
-    "violet",
-    "purple",
-    "fuchsia",
-    "pink",
-    "rose",
-  ],
   currentGradient: {},
-  currentSetName: "Default",
   sets: [
     {
       name: "Default",
@@ -76,8 +39,6 @@ if (localStorage.getItem("sets") !== null) {
 
 state.currentGradient = state.sets[0].gradients[0];
 
-const model = reactive({});
-
 // Add empty set
 const addSet = function() {
   const set = {
@@ -85,7 +46,7 @@ const addSet = function() {
     sort: 0,
     gradients: [],
   };
-  state.sets.unshift(set);
+  state.sets.unshift(set); // Add to beginning
 };
 
 // Add empty gradient
@@ -111,10 +72,6 @@ const addGradient = function(set) {
       },
     },
   });
-};
-
-const setTab = function(stop) {
-  state.tabActive = stop;
 };
 
 // Set color
@@ -158,31 +115,14 @@ const outputClasses = computed(() => {
   return classes.join(" ");
 });
 
-const outputClasses2 = function(gradient) {
-  let classes = ["bg-gradient-to-" + gradient.direction];
-  state.stops.forEach((stop) => {
-    const stop_options = gradient.colors[stop];
-    const shade = stop_options.shade ? "-" + stop_options.shade : "";
-
-    if (stop_options.active) {
-      classes.push(stop + "-" + stop_options.color + shade);
-    }
-  });
-
-  return classes.join(" ");
-};
-
 watchEffect(() => {
   localStorage.setItem("sets", JSON.stringify(state.sets));
 });
 
 export default {
   state: state,
-  model: model,
   setColor: setColor,
   addSet: addSet,
   addGradient: addGradient,
   outputClasses,
-  outputClasses2,
-  setTab,
 };

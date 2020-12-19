@@ -1,15 +1,10 @@
 <template>
   <button
     class="flex items-center justify-center p-2 m-2 text-white text-opacity-50 transform bg-black bg-opacity-25 rounded-full fill-current hover:bg-opacity-50 hover:text-opacity-100 test focus:outline-none hover:opacity-100"
-    :class="classes"
+    :class="additional_classes()"
     @click="setDirection(direction)"
+    :title="direction"
   >
-    <Dot
-      :is_hidden="
-        store.state.currentGradient &&
-          store.state.currentGradient.direction != direction
-      "
-    />
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -26,25 +21,35 @@
 
 <script>
 import { inject } from "vue";
-import Dot from "@/components/Dot.vue";
 
 export default {
-  components: {
-    Dot,
-  },
+  components: {},
   props: {
     direction: String,
     rotate: Number,
     classes: String,
   },
-  setup() {
+  setup(props) {
     const store = inject("global");
 
     function setDirection(direction) {
       store.state.currentGradient.direction = direction;
     }
 
-    return { store, setDirection };
+    function additional_classes() {
+      let classes = props.classes;
+      const active =
+        store.state.currentGradient &&
+        store.state.currentGradient.direction == props.direction;
+
+      classes += active
+        ? " bg-opacity-100 hover:bg-opacity-100 text-opacity-100"
+        : "";
+
+      return classes;
+    }
+
+    return { store, setDirection, additional_classes };
   },
 };
 </script>

@@ -23,7 +23,7 @@
           :key="item.key"
           :class="item.classes"
           :title="item.title"
-          @click="store.state.tabActive = key"
+          @click="state.stop_active = key"
         ></div>
       </div>
     </div>
@@ -33,6 +33,7 @@
 <script>
 import { inject, computed } from "vue";
 import HeadingTiny from "@/components/HeadingTiny.vue";
+import vclone from "@/vclone/";
 
 export default {
   props: ["type"],
@@ -41,12 +42,14 @@ export default {
   },
   setup(props) {
     const store = inject("global");
+    const { state } = vclone;
     let temp = "";
 
     const data = computed(() => {
       if (!store.state.currentGradient) return {};
+
       let out = {};
-      store.state.stops.forEach((stop) => {
+      state.stops.forEach((stop) => {
         const stop_options = store.state.currentGradient.colors[stop];
         let classes = "";
         let shade = "shade" in stop_options ? `-${stop_options.shade}` : "";
@@ -63,7 +66,7 @@ export default {
 
         out[stop] = {
           key: `preview-mix-${props.type}-${stop}`,
-          title: stop[0].toUpperCase() + stop.slice(1),
+          title: stop,
           classes: classes,
         };
       });
@@ -87,7 +90,7 @@ export default {
     }
     */
 
-    return { store, temp, data };
+    return { store, temp, data, state };
   },
 };
 </script>

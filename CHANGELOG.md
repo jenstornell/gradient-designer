@@ -1,5 +1,9 @@
 # Changelog
 
+## Minefield v2.2
+
+- Added titles on elements that needs them
+
 ## Minefield v2.1
 
 - Port gradient modal

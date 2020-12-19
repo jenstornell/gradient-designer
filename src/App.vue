@@ -4,14 +4,15 @@
     <SelectSet />
     <Sidebar />
     <Main />
-    <ModalAbout />
+    <Modal name="ModalAbout" />
   </div>
 </template>
 
 <script>
 import Sidebar from "@/components/Sidebar.vue";
 import Main from "@/components/Main.vue";
-import ModalAbout from "@/components/modals/ModalAbout.vue";
+//import ModalAbout from "@/components/modals/ModalAbout.vue";
+import Modal from "@/components/modals/Modal.vue";
 import Topbar from "@/components/Topbar.vue";
 import SelectSet from "@/components/SelectSet.vue";
 import global from "@/global.js";
@@ -24,7 +25,7 @@ export default {
   components: {
     Sidebar,
     Main,
-    ModalAbout,
+    Modal,
     Topbar,
     SelectSet,
   },
@@ -40,7 +41,7 @@ export default {
 .extra-white,
 .extra-transparent,
 .extra-current {
-  border: 1px solid #ccc;
+  border: 1px solid rgb(163, 163, 163);
 }
 
 .extra-transparent {
@@ -58,7 +59,7 @@ export default {
   border: none !important;
 }
 
-.extra-current:after {
+/*.extra-current:after {
   line-height: 1;
   content: "C";
   font-size: 1.15rem;
@@ -71,5 +72,5 @@ export default {
   top: 0;
   left: 0;
   color: white;
-}
+}*/
 </style>
