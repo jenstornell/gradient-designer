@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between px-2 pt-2 bg-gray-800">
+  <div class="flex justify-between px-2">
     <div>
       <button
         v-for="stop in state.stops"
@@ -18,15 +18,13 @@
 </template>
 
 <script>
-import { inject } from "vue";
 import vclone from "@/vclone/";
 
 export default {
   setup() {
-    const store = inject("global");
     const { state, setStopActive } = vclone;
 
-    return { store, state, setStopActive };
+    return { state, setStopActive };
   },
 };
 </script>

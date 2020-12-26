@@ -1,36 +1,24 @@
-import { reactive, readonly } from "vue";
+import { reactive, computed, watchEffect, readonly } from "vue";
+import directions from "@/vclone/directions.js";
+import colors from "@/vclone/colors.js";
 
 const state = reactive({
   stop_active: "from",
   stops: ["from", "via", "to"],
   modal: false,
+  currentGradient: {},
+  currentGradientId: 0,
+  currentSetId: 0,
+  sets: [],
+  css: "",
 });
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 const specials = ["transparent", "current", "black", "white"];
-const colors = [
-  "blueGray",
-  "coolGray",
-  "gray",
-  "trueGray",
-  "warmGray",
-  "red",
-  "orange",
-  "amber",
-  "yellow",
-  "lime",
-  "green",
-  "emerald",
-  "teal",
-  "cyan",
-  "lightBlue",
-  "blue",
-  "indigo",
-  "violet",
-  "purple",
-  "fuchsia",
-  "pink",
-  "rose",
-];
+
+// Getter - Computed
+const thisGradientClasses = computed(() => {
+  return currentGradientClasses(state.currentSetId, state.currentGradientId);
+});
 
 // Mutations - Functions
 const setStopActive = function(stop) {
@@ -41,7 +29,25 @@ const setModal = function(value) {
   state.modal = value;
 };
 
-const outputClasses2 = function(gradient) {
+const currentGradientClasses = function(setId = 0, gradientId = null) {
+  const gradient = getGradient(setId, gradientId);
+
+  if (!gradient) return;
+
+  let classes = [];
+  state.stops.forEach((stop) => {
+    const options = gradient.colors[stop];
+    const shade = options.shade ? "-" + options.shade : "";
+
+    if (options.active) {
+      classes.push(stop + "-" + options.color + shade);
+    }
+  });
+
+  return `bg-gradient-to-${gradient.direction} ${classes.join(" ")}`;
+};
+
+/*const outputClasses2 = function(gradient) {
   let classes = ["bg-gradient-to-" + gradient.direction];
   state.stops.forEach((stop) => {
     const stop_options = gradient.colors[stop];
@@ -53,14 +59,107 @@ const outputClasses2 = function(gradient) {
   });
 
   return classes.join(" ");
+};*/
+
+const setColor = function(stop, color) {
+  if (!thisGradient.value || !thisGradient.value.colors[stop].active) return;
+
+  thisGradient.value.colors[stop].color = color;
 };
 
+const setShade = function(shade) {
+  if (
+    !thisGradient.value ||
+    !thisGradient.value.colors[state.stop_active].active
+  )
+    return;
+
+  thisGradient.value.colors[state.stop_active].shade = shade;
+};
+
+// Add empty gradient
+const addGradient = function(set) {
+  set.gradients.push({
+    name: "My gradient",
+    direction: "r",
+    colors: {
+      from: {
+        color: "cyan",
+        shade: 400,
+        active: true,
+      },
+      via: {
+        color: "gray",
+        shade: 500,
+        active: false,
+      },
+      to: {
+        color: "blue",
+        shade: 600,
+        active: true,
+      },
+    },
+  });
+};
+
+// Add empty set
+const addSet = function() {
+  const set = {
+    name: "My set",
+    sort: 0,
+    gradients: [],
+  };
+  state.sets.unshift(set); // Add to beginning
+};
+
+addSet();
+addGradient(state.sets[0]);
+
+const setGradient = function(key) {
+  state.currentGradientId = key;
+};
+
+const getGradient = function(setId = 0, gradientId) {
+  return state.sets[setId].gradients[gradientId];
+};
+
+const toggleActivate = function(stop) {
+  thisGradient.value.colors[stop].active = !thisGradient.value.colors[stop]
+    .active;
+};
+
+const thisGradient = computed(() => {
+  return state.sets[state.currentSetId].gradients[state.currentGradientId];
+});
+
+watchEffect(() => {
+  localStorage.setItem("sets", JSON.stringify(state.sets));
+});
+
+if (localStorage.getItem("sets") !== null) {
+  state.sets = JSON.parse(localStorage.getItem("sets"));
+}
+
+state.currentGradient = state.sets[0].gradients[0];
+
 export default {
-  state: readonly(state),
+  state: state,
   shades: readonly(shades),
   specials: readonly(specials),
   colors: readonly(colors),
-  outputClasses2,
+
+  toggleActivate,
+  //outputClasses2,
   setModal,
+  thisGradientClasses,
+  setColor,
   setStopActive,
+  addGradient,
+  setGradient,
+  getGradient,
+  currentGradientClasses,
+  thisGradient,
+  addSet,
+  setShade,
+  directions,
 };

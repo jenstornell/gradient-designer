@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center justify-between px-4 py-2 text-2xl font-bold text-white bg-gray-800 font-heading"
+    class="flex items-center justify-between px-4 py-2 text-2xl font-bold text-white font-heading"
   >
     <div>
       Gradient Designer

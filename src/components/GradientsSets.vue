@@ -1,6 +1,6 @@
 <template>
   <div
-    v-for="(set, index) in store.state.sets"
+    v-for="(set, index) in state.sets"
     :key="`set-${index}`"
     class="py-2 bg-white"
   >
@@ -10,15 +10,15 @@
     <Gradients :set="set" />
 
     <div>
-      <button @click="store.addGradient(set.name)">Adda</button>
+      <button @click="addGradient(set.name)">Adda</button>
     </div>
   </div>
 </template>
 
 <script>
-import { inject } from "vue";
 import Gradients from "@/components/gradients/Gradients.vue";
 //import GradientsAdd from "@/components/gradients/GradientsAdd.vue";
+import vclone from "@/vclone/";
 
 export default {
   components: {
@@ -27,9 +27,9 @@ export default {
   },
 
   setup() {
-    const store = inject("global");
+    const { addGradient } = vclone;
 
-    return { store };
+    return { addGradient };
   },
 };
 </script>

@@ -55,11 +55,12 @@
 </template>
 
 <script>
-import { inject, ref } from "vue";
+import { ref } from "vue";
+import vclone from "@/vclone/";
 
 export default {
   setup() {
-    const store = inject("global");
+    const { state } = vclone;
     let question = ref(false);
 
     function setQuestion(value) {
@@ -69,17 +70,17 @@ export default {
     function deleteGradient() {
       this.setQuestion(false);
 
-      store.state.sets.forEach((set) => {
+      state.sets.forEach((set) => {
         set.gradients.forEach((gradient, index) => {
-          if (gradient == store.state.currentGradient) {
+          if (gradient == state.currentGradient) {
             set.gradients.splice(index, 1);
-            store.state.currentGradient = {};
+            state.currentGradient = {};
           }
         });
       });
     }
 
-    return { store, question, setQuestion, deleteGradient };
+    return { question, setQuestion, deleteGradient };
   },
 };
 </script>

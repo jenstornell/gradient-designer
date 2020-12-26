@@ -11,7 +11,7 @@
       <HeadingTiny title="Gradient Preview" />
       <button
         class="w-32 h-10 rounded-full cursor-default focus:outline-none"
-        :class="store.outputClasses.value"
+        :class="thisGradientClasses.value"
       ></button>
     </div>
     <div class="flex flex-col items-end gap-2">
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { inject, computed } from "vue";
+import { computed } from "vue";
 import HeadingTiny from "@/components/HeadingTiny.vue";
 import vclone from "@/vclone/";
 
@@ -41,16 +41,14 @@ export default {
     HeadingTiny,
   },
   setup(props) {
-    const store = inject("global");
-    const { state } = vclone;
-    let temp = "";
+    const { state, thisGradientClasses } = vclone;
 
     const data = computed(() => {
-      if (!store.state.currentGradient) return {};
+      if (!state.currentGradient) return {};
 
       let out = {};
       state.stops.forEach((stop) => {
-        const stop_options = store.state.currentGradient.colors[stop];
+        const stop_options = state.currentGradient.colors[stop];
         let classes = "";
         let shade = "shade" in stop_options ? `-${stop_options.shade}` : "";
         classes += `bg-${stop_options.color}${shade}`;
@@ -90,7 +88,7 @@ export default {
     }
     */
 
-    return { store, temp, data, state };
+    return { data, state, thisGradientClasses };
   },
 };
 </script>

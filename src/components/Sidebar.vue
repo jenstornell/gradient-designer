@@ -1,12 +1,12 @@
 <template>
-  <div class="relative flex overflow-auto bg-gray-800">
+  <div class="relative flex overflow-auto">
     <!-- Add set -->
     <div>
       <!-- Sets -->
       <div class="flex flex-col gap-8 px-4 py-4 pt-2">
         <div
           class="flex items-center gap-2"
-          v-for="(set, index) in store.state.sets"
+          v-for="(set, index) in state.sets"
           :key="`set-${index}`"
         >
           <!-- Gradients -->
@@ -16,18 +16,18 @@
               v-for="(gradient, key) in set.gradients"
               :key="`gradient-${index}-${key}`"
               class="flex items-center justify-center w-12 h-12 text-gray-300 rounded-md ring-2 ring-black ring-opacity-25 ring-offset-0 ring-offset-gray-800"
-              :class="outputClasses2(gradient)"
+              :class="currentGradientClasses(0, key)"
               :title="gradient.name"
-              @click="setGradient(gradient, set.name)"
+              @click="setGradient(key)"
             >
-              <Dot :is_hidden="store.state.currentGradient != gradient" />
+              <Dot :is_hidden="state.currentGradientId != key" />
             </div>
           </div>
 
           <!-- Add gradient -->
           <div class="relative flex">
             <button
-              @click="store.addGradient(set)"
+              @click="addGradient(set)"
               class="flex items-center justify-center w-12 h-12 text-white rounded-md focus:outline-none hover:bg-gray-700"
               title="Add"
             >
@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import { inject } from "vue";
 import Dot from "@/components/Dot.vue";
 import vclone from "@/vclone/";
 
@@ -64,16 +63,21 @@ export default {
     Dot,
   },
   setup() {
-    const store = inject("global");
-    const { outputClasses2 } = vclone;
+    const {
+      outputClasses2,
+      setGradient,
+      addGradient,
+      state,
+      currentGradientClasses,
+    } = vclone;
 
-    function setGradient(gradient) {
-      store.state.currentGradient = gradient;
-      //store.state.currentSetName = setName;
-
-      //store.state.currentGradient.name = "whatever";
-    }
-    return { store, setGradient, outputClasses2 };
+    return {
+      setGradient,
+      outputClasses2,
+      addGradient,
+      state,
+      currentGradientClasses,
+    };
   },
 };
 </script>

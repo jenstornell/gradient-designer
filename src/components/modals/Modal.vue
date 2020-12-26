@@ -12,12 +12,19 @@
 
 <script>
 import ModalAbout from "@/components/modals/ModalAbout.vue";
+import ModalCode from "@/components/modals/ModalCode.vue";
+import ModalGradientInfo from "@/components/modals/ModalGradientInfo.vue";
+import ModalGradientPort from "@/components/modals/ModalGradientPort.vue";
+
 import vclone from "@/vclone/";
 
 export default {
   props: ["name"],
   components: {
     ModalAbout,
+    ModalCode,
+    ModalGradientInfo,
+    ModalGradientPort,
   },
   setup() {
     const { state, setModal } = vclone;

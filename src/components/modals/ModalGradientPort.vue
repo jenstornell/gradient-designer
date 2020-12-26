@@ -37,7 +37,7 @@
             class="px-6 py-4 text-blue-800"
             style="font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;"
           >
-            {{ JSON.stringify(store.state.currentGradient) }}
+            {{ JSON.stringify(state.currentGradient) }}
           </div>
           <div class="px-6">
             <svg
@@ -87,14 +87,15 @@
 
 <script>
 import HeadingSmall from "@/components/HeadingSmall.vue";
-import { inject, ref } from "vue";
+import { ref } from "vue";
+import vclone from "@/vclone/";
 
 export default {
   components: {
     HeadingSmall,
   },
   setup() {
-    const store = inject("global");
+    const { state } = vclone;
     let modal = ref(false);
     let importValue = ref("");
     let is_error = ref(false);
@@ -111,10 +112,7 @@ export default {
       }
       const obj = JSON.parse(this.importValue);
 
-      store.state.currentGradient = Object.assign(
-        store.state.currentGradient,
-        obj
-      );
+      state.currentGradient = Object.assign(state.currentGradient, obj);
 
       this.modal = false;
       this.importValue = "";
@@ -137,7 +135,7 @@ export default {
 
     return {
       is_error,
-      store,
+      state,
       modal,
       setModal,
       closeModal,

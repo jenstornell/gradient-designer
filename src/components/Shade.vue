@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-2" v-if="isShade">
     <h2 class="font-bold uppercase">
-      Shade {{ store.state.currentGradient.colors[stop].color }}
+      Shade {{ thisGradient.colors[stop].color }}
     </h2>
     <div class="flex flex-wrap gap-1">
       <div
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { inject, computed } from "vue";
+import { computed } from "vue";
 import vclone from "@/vclone/";
 
 export default {
@@ -31,15 +31,13 @@ export default {
     stop: String,
   },
   setup(props) {
-    const { shades, colors } = vclone;
-    const store = inject("global");
+    const { shades, colors, thisGradient, setShade } = vclone;
 
     function dotClasses(shade) {
       let classes = "";
-      const active =
-        store.state.currentGradient.colors[props.stop].shade == shade;
+      const active = thisGradient.value.colors[props.stop].shade == shade;
       classes += active ? "" : " hidden";
-      const color = store.state.currentGradient.colors[props.stop].color;
+      const color = thisGradient.value.colors[props.stop].color;
       classes += " bg-gradient-to-br";
       if (shade < 400) {
         classes += ` from-${color}-400 to-${color}-800`;
@@ -50,13 +48,11 @@ export default {
     }
 
     function classes(shade) {
-      const color = store.state.currentGradient.colors[props.stop].color;
+      const color = thisGradient.value.colors[props.stop].color;
       let classes = "";
 
-      classes += `bg-${
-        store.state.currentGradient.colors[props.stop].color
-      }-${shade}`;
-      classes += !store.state.currentGradient.colors[props.stop].active
+      classes += `bg-${thisGradient.value.colors[props.stop].color}-${shade}`;
+      classes += !thisGradient.value.colors[props.stop].active
         ? " opacity-25"
         : "";
 
@@ -65,21 +61,20 @@ export default {
     }
 
     let isShade = computed(() => {
-      if (!store.state.currentGradient) return;
-      if ("colors" in store.state.currentGradient) {
-        const color = store.state.currentGradient.colors[props.stop].color;
-        return colors.includes(color);
-      }
-      return false;
+      if (!thisGradient) return;
+      console.log(thisGradient);
+      const color = thisGradient.value.colors[props.stop].color;
+      return colors.includes(color);
     });
 
-    function setShade(shade) {
-      const stop_options = store.state.currentGradient.colors[props.stop];
-      if (!stop_options.active) return;
-      stop_options.shade = shade;
-    }
-
-    return { store, isShade, setShade, classes, dotClasses, shades };
+    return {
+      isShade,
+      classes,
+      dotClasses,
+      shades,
+      thisGradient,
+      setShade,
+    };
   },
 };
 </script>

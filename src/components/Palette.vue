@@ -3,24 +3,24 @@
     <div class="flex justify-between gap-2">
       <h2 class="uppercase">
         <span class="font-bold">Color:</span>
-        {{ colorLabel }}
+        {{ thisGradient.colors[stop].color }}
       </h2>
-      <Switch :id="stop" />
+
+      <Switch :stop="stop" />
     </div>
+
     <div
       class="flex flex-col gap-1"
-      v-if="store.state.currentGradient"
       :class="{
-        'opacity-25': !store.state.currentGradient.colors[stop].active,
+        'opacity-25': !thisGradient.colors[stop].active,
       }"
     >
       <div class="flex flex-wrap gap-1">
-        <!-- Extra -->
         <div
-          v-for="color in state.specials"
+          v-for="color in specials"
           class="relative flex items-center justify-center w-8 h-8 text-white"
           :key="color"
-          @click="store.setColor(stop, color)"
+          @click="setColor(stop, color)"
           :title="color"
         >
           <div
@@ -43,7 +43,7 @@
           v-for="color in colors"
           class="relative flex items-center justify-center w-8 h-8"
           :key="color"
-          @click="store.setColor(stop, color, true)"
+          @click="setColor(stop, color, true)"
           :title="color"
         >
           <div
@@ -61,7 +61,6 @@
 </template>
 
 <script>
-import { inject, computed } from "vue";
 import Switch from "@/components/Switch.vue";
 import vclone from "@/vclone/";
 
@@ -74,27 +73,21 @@ export default {
     stop: String,
   },
   setup(props) {
-    const store = inject("global");
-    const { colors, state } = vclone;
-
-    const colorLabel = computed(() => {
-      if (!store.state.currentGradient) return;
-      const stopObj = store.state.currentGradient.colors[props.stop];
-      if (stopObj && "color" in stopObj) {
-        return stopObj["color"];
-      }
-    });
+    const { colors, setColor, specials, state, thisGradient } = vclone;
 
     function dotClasses(color) {
-      const active =
-        store.state.currentGradient.colors[props.stop].color == color;
+      const active = thisGradient.value.colors[props.stop].color == color;
       let classes = "";
       let from = 0;
       let to = 0;
 
-      if (color == "white" || color == "transparent") {
-        color = "gray";
+      if (color == "white") {
+        color = "coolGray";
         from = 400;
+        to = 600;
+      } else if (color == "transparent") {
+        color = "coolGray";
+        from = 500;
         to = 800;
       } else {
         from = 50;
@@ -102,7 +95,7 @@ export default {
       }
 
       if (["black", "current"].includes(color)) {
-        color = "gray";
+        color = "coolGray";
       }
 
       classes += active ? "" : " hidden";
@@ -112,7 +105,14 @@ export default {
       return classes;
     }
 
-    return { store, state, colorLabel, dotClasses, colors };
+    return {
+      state,
+      specials,
+      dotClasses,
+      setColor,
+      colors,
+      thisGradient,
+    };
   },
 };
 </script>

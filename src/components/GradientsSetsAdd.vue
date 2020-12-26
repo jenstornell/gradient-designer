@@ -9,12 +9,13 @@
   </div>
 </template>
 <script>
-import { inject } from "vue";
+import vclone from "@/vclone/";
 
 export default {
   setup() {
-    const store = inject("global");
-    return { store };
+    const { state } = vclone;
+
+    return { addSet };
   },
 };
 </script>

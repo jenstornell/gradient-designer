@@ -56,12 +56,12 @@
           class="flex items-center justify-between bg-gray-100 shadow select-all"
         >
           <div
-            v-if="store.outputClasses.value"
+            v-if="thisGradientClasses.value"
             class="px-6 py-4 text-blue-800"
             style="font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;"
           >
             <span
-              v-for="(item, index) in store.outputClasses.value.split(' ')"
+              v-for="(item, index) in thisGradientClasses.value.split(' ')"
               :key="`out_class_${index}`"
             >
               <span class="text-red-800" v-show="{ hidden: index == 0 }">{{
@@ -123,14 +123,15 @@
 
 <script>
 import HeadingSmall from "@/components/HeadingSmall.vue";
-import { inject, ref } from "vue";
+import { ref } from "vue";
+import vclone from "@/vclone/";
 
 export default {
   components: {
     HeadingSmall,
   },
   setup() {
-    const store = inject("global");
+    const { state, thisGradientClasses } = vclone;
     const prefix = ref("");
     let modal = ref(false);
 
@@ -144,7 +145,7 @@ export default {
       this.modal = false;
     }
 
-    return { store, modal, setModal, closeModal, prefix };
+    return { state, modal, setModal, closeModal, prefix, thisGradientClasses };
   },
 };
 </script>

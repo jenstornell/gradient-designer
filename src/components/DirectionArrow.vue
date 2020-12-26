@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { inject } from "vue";
+import vclone from "@/vclone/";
 
 export default {
   components: {},
@@ -30,17 +30,18 @@ export default {
     classes: String,
   },
   setup(props) {
-    const store = inject("global");
+    const { thisGradient } = vclone;
 
     function setDirection(direction) {
-      store.state.currentGradient.direction = direction;
+      console.log("test");
+      console.log(direction);
+      thisGradient.value.direction = direction;
     }
 
     function additional_classes() {
       let classes = props.classes;
       const active =
-        store.state.currentGradient &&
-        store.state.currentGradient.direction == props.direction;
+        thisGradient.value && thisGradient.value.direction == props.direction;
 
       classes += active
         ? " bg-opacity-100 hover:bg-opacity-100 text-opacity-100"
@@ -49,7 +50,7 @@ export default {
       return classes;
     }
 
-    return { store, setDirection, additional_classes };
+    return { setDirection, additional_classes };
   },
 };
 </script>

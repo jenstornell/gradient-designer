@@ -20,7 +20,7 @@
   </div>
   <div
     class="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50"
-    v-if="store.state.currentGradient"
+    v-if="state.currentGradient"
     @click="closeModal($event)"
     :class="{ hidden: !modal }"
   >
@@ -36,7 +36,7 @@
             class="w-64 p-2 bg-gray-100 rounded ring-2 ring-gray-200 focus:outline-none focus:ring-2 focus:ring-green-400"
             spellcheck="false"
             autocomplete="off"
-            :value="store.state.currentGradient.name"
+            :value="state.currentGradient.name"
             @input="setName($event)"
           />
         </div>
@@ -46,19 +46,20 @@
 </template>
 
 <script>
-import { inject, ref } from "vue";
+import { ref } from "vue";
 import HeadingSmall from "@/components/HeadingSmall.vue";
+import vclone from "@/vclone/";
 
 export default {
   components: {
     HeadingSmall,
   },
   setup() {
-    const store = inject("global");
+    const { state } = vclone;
     let modal = ref(false);
 
     function setName(e) {
-      store.state.currentGradient.name = e.currentTarget.value;
+      state.currentGradient.name = e.currentTarget.value;
     }
 
     function setModal(value) {
@@ -71,7 +72,7 @@ export default {
       this.modal = false;
     }
 
-    return { store, setName, modal, setModal, closeModal };
+    return { state, setName, modal, setModal, closeModal };
   },
 };
 </script>

@@ -11,7 +11,7 @@
       <textarea
         id="export"
         class="h-64 p-2 resize-none focus:outline-none ring-2 ring-gray-200 focus:ring-green-400"
-        :value="JSON.stringify(store.state.currentGradient)"
+        :value="JSON.stringify(state.currentGradient)"
         spellcheck="false"
       ></textarea>
     </div>
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { inject } from "vue";
 import HeadingSmall from "@/components/HeadingSmall.vue";
 import vclone from "@/vclone/";
 
@@ -28,10 +27,9 @@ export default {
     HeadingSmall,
   },
   setup() {
-    const store = inject("global");
     const { state } = vclone;
 
-    return { store, state };
+    return { state };
   },
 };
 </script>

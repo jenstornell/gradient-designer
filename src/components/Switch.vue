@@ -1,40 +1,39 @@
 <template>
-  <div class="flex items-center gap-2" v-if="store.state.currentGradient">
+  <div class="flex items-center gap-2">
     <div
       class="uppercase"
-      :class="{ hidden: !store.state.currentGradient.colors[id].active }"
+      :class="{ hidden: !thisGradient.colors[stop].active }"
     >
       Active
     </div>
     <div
       class="uppercase"
-      :class="{ hidden: store.state.currentGradient.colors[id].active }"
+      :class="{ hidden: thisGradient.colors[stop].active }"
     >
       Inactive
     </div>
-    <label :for="`switch-${id}`">
-      <input :id="`switch-${id}`" type="checkbox" @click="toggleActivate()" />
+    <label :for="`switch-${stop}`">
+      <input
+        :id="`switch-${stop}`"
+        type="checkbox"
+        @click="toggleActivate(stop)"
+      />
       <div></div>
     </label>
   </div>
 </template>
 
 <script>
-import { inject } from "vue";
+import vclone from "@/vclone/";
 
 export default {
   props: {
-    id: String,
+    stop: String,
   },
   setup(props) {
-    const store = inject("global");
+    const { thisGradient, toggleActivate } = vclone;
 
-    function toggleActivate() {
-      store.state.currentGradient.colors[props.id].active = !store.state
-        .currentGradient.colors[props.id].active;
-    }
-
-    return { store, toggleActivate };
+    return { toggleActivate, thisGradient };
   },
 };
 </script>

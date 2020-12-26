@@ -1,76 +1,79 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden font-body">
-    <Topbar />
-    <SelectSet />
-    <Sidebar />
-    <Main />
+    <div class="bg-gradient-to-b from-trueGray-900 to-trueGray-800">
+      <Top />
+      <SelectSet />
+      <Sidebar />
+      <Tabs />
+    </div>
+    <!-- Main -->
+    <div class="flex flex-col flex-1" v-if="thisGradient">
+      <div class="flex flex-col flex-1 w-full overflow-auto">
+        <!-- Palettes -->
+        <div class="flex flex-col flex-1">
+          <!-- Palette -->
+          <div v-for="stop in state.stops" :key="`palette-${stop}`">
+            <div
+              class="flex flex-col gap-4 p-4 border-b shadow-b-2xl bg-gradient-to-b from-white"
+              :class="{ hidden: state.stop_active !== stop }"
+            >
+              <Palette :title="stop" :stop="stop" />
+              <Shade :stop="stop" />
+            </div>
+          </div>
+          <!--<Port />-->
+        </div>
+
+        <div
+          v-if="state.stops.includes(state.stop_active)"
+          class="relative h-full min-h-64"
+          :class="thisGradientClasses"
+          ref="root"
+        >
+          <Direction />
+        </div>
+
+        <div class="flex" v-if="state.stops.includes(state.stop_active)">
+          <PreviewMix type="white" />
+          <PreviewMix type="black" />
+        </div>
+      </div>
+    </div>
     <Modal name="ModalAbout" />
   </div>
 </template>
 
 <script>
+// Components
 import Sidebar from "@/components/Sidebar.vue";
-import Main from "@/components/Main.vue";
-//import ModalAbout from "@/components/modals/ModalAbout.vue";
-import Modal from "@/components/modals/Modal.vue";
-import Topbar from "@/components/Topbar.vue";
+import Tabs from "@/components/Tabs.vue";
 import SelectSet from "@/components/SelectSet.vue";
-import global from "@/global.js";
+import Top from "@/components/Top.vue";
+import Modal from "@/components/modals/Modal.vue";
+import Palette from "@/components/Palette.vue";
+import Shade from "@/components/Shade.vue";
+import Direction from "@/components/Direction.vue";
+import PreviewMix from "@/components/PreviewMix.vue";
+
+import vclone from "@/vclone/";
 
 export default {
   name: "App",
-  provide: {
-    global,
-  },
   components: {
-    Sidebar,
-    Main,
     Modal,
-    Topbar,
+    Palette,
     SelectSet,
+    Sidebar,
+    Tabs,
+    Top,
+    Shade,
+    Direction,
+    PreviewMix,
+  },
+  setup() {
+    const { state, thisGradientClasses, thisGradient } = vclone;
+
+    return { state, thisGradientClasses, thisGradient };
   },
 };
 </script>
-
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@400;700&display=swap");
-#app {
-  height: 100%;
-}
-
-.extra-white,
-.extra-transparent,
-.extra-current {
-  border: 1px solid rgb(163, 163, 163);
-}
-
-.extra-transparent {
-  background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
-    linear-gradient(-45deg, #ccc 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #ccc 75%),
-    linear-gradient(-45deg, transparent 75%, #ccc 75%);
-  background-size: 1rem 1rem;
-  background-position: 0 0, 0 0.5rem, 0.5rem -0.5rem, -0.5rem 0;
-}
-
-.extra-current {
-  position: relative;
-  background: black !important;
-  border: none !important;
-}
-
-/*.extra-current:after {
-  line-height: 1;
-  content: "C";
-  font-size: 1.15rem;
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  color: white;
-}*/
-</style>
