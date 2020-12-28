@@ -11,7 +11,7 @@
       <HeadingTiny title="Gradient Preview" />
       <button
         class="w-32 h-10 rounded-full cursor-default focus:outline-none"
-        :class="thisGradientClasses.value"
+        :class="thisGradientClasses"
       ></button>
     </div>
     <div class="flex flex-col items-end gap-2">

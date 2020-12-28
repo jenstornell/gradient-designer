@@ -26,10 +26,10 @@ export default {
     HeadingSmall,
   },
   setup() {
-    const { state } = vclone;
+    const { state, setGradientName } = vclone;
 
     function setName(e) {
-      state.currentGradient.name = e.currentTarget.value;
+      setGradientName(e.currentTarget.value);
     }
 
     return { state, setName };

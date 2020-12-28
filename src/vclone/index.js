@@ -29,6 +29,12 @@ const setModal = function(value) {
   state.modal = value;
 };
 
+function setGradientName(value) {
+  if (!thisGradient.value) return;
+
+  thisGradient.value.name = value;
+}
+
 const currentGradientClasses = function(setId = 0, gradientId = null) {
   const gradient = getGradient(setId, gradientId);
 
@@ -173,4 +179,5 @@ export default {
   setShade,
   directions,
   importGradient,
+  setGradientName,
 };
