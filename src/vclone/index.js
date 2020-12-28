@@ -1,6 +1,8 @@
 import { reactive, computed, watchEffect, readonly } from "vue";
 import directions from "@/vclone/directions.js";
 import colors from "@/vclone/colors.js";
+import shades from "@/vclone/shades.js";
+import specials from "@/vclone/specials.js";
 
 const state = reactive({
   stop_active: "from",
@@ -12,8 +14,6 @@ const state = reactive({
   sets: [],
   css: "",
 });
-const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
-const specials = ["transparent", "current", "black", "white"];
 
 // Getter - Computed
 const thisGradientClasses = computed(() => {
@@ -115,6 +115,16 @@ const addSet = function() {
 addSet();
 addGradient(state.sets[0]);
 
+const importGradient = function(value) {
+  const obj = JSON.parse(value);
+  let gradient =
+    state.sets[state.currentSetId].gradients[state.currentGradientId];
+
+  state.sets[state.currentSetId].gradients[
+    state.currentGradientId
+  ] = Object.assign(gradient, obj);
+};
+
 const setGradient = function(key) {
   state.currentGradientId = key;
 };
@@ -162,4 +172,5 @@ export default {
   addSet,
   setShade,
   directions,
+  importGradient,
 };

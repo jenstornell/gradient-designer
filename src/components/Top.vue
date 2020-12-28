@@ -18,7 +18,7 @@
       -->
       <div
         class="p-2 text-white rounded-full fill-current hover:bg-gray-700"
-        @click="setModal(true)"
+        @click="setModal('ModalAbout')"
         title="About"
       >
         <svg
