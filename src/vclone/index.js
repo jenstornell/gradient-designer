@@ -3,6 +3,7 @@ import directions from "@/vclone/directions.js";
 import colors from "@/vclone/colors.js";
 import shades from "@/vclone/shades.js";
 import specials from "@/vclone/specials.js";
+import defaultGradient from "@/vclone/defaultGradient.js";
 
 const state = reactive({
   stop_active: "from",
@@ -85,27 +86,7 @@ const setShade = function(shade) {
 
 // Add empty gradient
 const addGradient = function(set) {
-  set.gradients.push({
-    name: "My gradient",
-    direction: "r",
-    colors: {
-      from: {
-        color: "cyan",
-        shade: 400,
-        active: true,
-      },
-      via: {
-        color: "gray",
-        shade: 500,
-        active: false,
-      },
-      to: {
-        color: "blue",
-        shade: 600,
-        active: true,
-      },
-    },
-  });
+  set.gradients.push(defaultGradient);
 };
 
 // Add empty set

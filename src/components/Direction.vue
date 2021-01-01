@@ -2,23 +2,7 @@
   <div
     class="absolute top-0 right-0 z-20 flex flex-col items-end justify-center w-24 mt-14"
   >
-    <GradientDelete />
-
-    <div class="flex flex-col items-end gap-2 mt-2 mr-2">
-      <MenuTrigger trigger="ModalCode" title="Code">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
-        >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path
-            d="M23 12l-7.071 7.071-1.414-1.414L20.172 12l-5.657-5.657 1.414-1.414L23 12zM3.828 12l5.657 5.657-1.414 1.414L1 12l7.071-7.071 1.414 1.414L3.828 12z"
-          />
-        </svg>
-      </MenuTrigger>
-
+    <div class="flex flex-col items-end gap-2 mr-2">
       <MenuTrigger trigger="ModalGradientInfo" title="Info">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -29,6 +13,20 @@
           <path fill="none" d="M0 0h24v24H0z" />
           <path
             d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM11 7h2v2h-2V7zm0 4h2v6h-2v-6z"
+          />
+        </svg>
+      </MenuTrigger>
+
+      <MenuTrigger trigger="ModalCode" title="Code">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path fill="none" d="M0 0h24v24H0z" />
+          <path
+            d="M23 12l-7.071 7.071-1.414-1.414L20.172 12l-5.657-5.657 1.414-1.414L23 12zM3.828 12l5.657 5.657-1.414 1.414L1 12l7.071-7.071 1.414 1.414L3.828 12z"
           />
         </svg>
       </MenuTrigger>
@@ -46,6 +44,8 @@
           />
         </svg>
       </MenuTrigger>
+
+      <GradientDelete />
     </div>
     <Modal name="ModalCode" />
     <Modal name="ModalGradientInfo" />
